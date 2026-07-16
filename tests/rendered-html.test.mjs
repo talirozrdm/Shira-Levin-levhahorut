@@ -18,6 +18,7 @@ const forbiddenCopyPattern = new RegExp(
     .map((parts) => parts.join(""))
     .join("|"),
 );
+const primaryCtaPattern = /לתיאום שיחת היכרות בוואטסאפ/g;
 
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -73,6 +74,7 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.match(html, /050-753-2044/);
   assert.match(html, /wa\.me\/972507532044/);
   assert.match(html, /לתיאום שיחת היכרות בוואטסאפ/);
+  assert.equal((html.match(primaryCtaPattern) ?? []).length, 2);
   assert.match(html, /שלחו לי הודעה בוואטסאפ/);
   assert.match(html, /@shira_goldman_levin/);
   assert.doesNotMatch(html, /<form\b/);
@@ -83,20 +85,26 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
 });
 
 test("keeps starter code and disallowed copy out of the finished page", async () => {
-  const [page, layout, css, packageJson] = await Promise.all([
+  const [page, layout, css, packageJson, privacy, accessibility] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../public/privacy.html", import.meta.url), "utf8"),
+    readFile(new URL("../public/accessibility.html", import.meta.url), "utf8"),
   ]);
-  const combined = `${page}\n${layout}\n${css}\n${packageJson}`;
+  const combined = `${page}\n${layout}\n${css}\n${packageJson}\n${privacy}\n${accessibility}`;
 
   assert.doesNotMatch(combined, starterPattern);
   assert.doesNotMatch(combined, longDashPattern);
   assert.doesNotMatch(combined, forbiddenCopyPattern);
+  assert.doesNotMatch(combined, /Google Analytics|Meta Pixel|לא בוצעה בדיקת|הערת מפתח|שירה תחזור|שירה מלווה|שירה מתמחה/);
   assert.match(page, /lev-hahorut-logo-512\.png/);
   assert.doesNotMatch(page, /submitContact|FormEvent|contact-form|aria-invalid|field-error/);
+  assert.match(css, /--body-copy-size:\s*calc\(18px \* var\(--user-font-scale\)\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
+  assert.match(privacy, /נכון למועד פרסום האתר לא נעשה שימוש בכלי מדידה או מעקב של צד שלישי/);
+  assert.match(accessibility, /נעשה מאמץ להנגיש את האתר בהתאם להנחיות הנגישות המקובלות/);
 
   await assert.rejects(
     access(new URL("../app/_sites-preview/" + "Skeleton" + "Preview.tsx", import.meta.url)),

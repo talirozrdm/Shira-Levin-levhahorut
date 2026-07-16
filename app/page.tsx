@@ -15,7 +15,7 @@ const trustItems = [
   },
   {
     title: "גישת אדלר",
-    text: "הדרכת הורים והנחיית קבוצות",
+    text: "אני מדריכת הורים ומנחת קבוצות",
   },
   {
     title: "התמחות במתבגרים",
@@ -27,7 +27,7 @@ const trustItems = [
   },
   {
     title: "ליווי אונליין",
-    text: "בזום בכל הארץ",
+    text: "אני מלווה בזום בכל הארץ",
   },
 ];
 
@@ -84,7 +84,7 @@ const processSteps = [
   "אתם שולחים הודעה, ואני מתאמת איתכם שיחת היכרות קצרה.",
   "במפגש הראשון אני ממפה יחד איתכם את האתגרים ומגדירה מטרות.",
   "בכל מפגש אני משלבת הבנה, כלים ותרגול מותאם לבית.",
-  "בין המפגשים אתם מיישמים, ובמפגש הבא אנחנו בוחנים יחד את ההתקדמות.",
+  "בין המפגשים אתם מיישמים, ובמפגש הבא אני בוחנת יחד איתכם את ההתקדמות.",
 ];
 
 const faqItems = [
@@ -100,16 +100,16 @@ const faqItems = [
   },
   {
     question: "האם כל התהליך מתקיים בזום?",
-    answer: "כן. הליווי מתקיים אונליין בזום וזמין להורים בכל הארץ.",
+    answer: "כן. אני מלווה אונליין בזום, כך שאפשר להצטרף מכל מקום בארץ.",
   },
   {
     question: "האם מקבלים כלים ליישום בבית?",
     answer:
-      "כן. כל מפגש כולל כלים ותרגול מעשי שאפשר ליישם בבית בין המפגשים.",
+      "כן. בכל מפגש אני משלבת כלים ותרגול מעשי שאפשר ליישם בבית בין המפגשים.",
   },
   {
     question: "האם הילדים משתתפים במפגשים?",
-    answer: "לא. המפגשים מתקיימים עם ההורים.",
+    answer: "לא. אני מקיימת את המפגשים עם ההורים.",
   },
   {
     question: "האם הליווי מתאים להורים למתבגרים?",
@@ -119,11 +119,11 @@ const faqItems = [
   {
     question: "האם הליווי מתאים להורים לילדים על הרצף האוטיסטי?",
     answer:
-      "כן. הליווי מותאם לצרכים הייחודיים של הילד, ההורים והמשפחה.",
+      "כן. אני מתאימה את הליווי לצרכים הייחודיים של הילד, ההורים והמשפחה.",
   },
   {
     question: "איך קובעים שיחת היכרות?",
-    answer: "שולחים הודעת וואטסאפ ומתאמים שיחת היכרות קצרה.",
+    answer: "אתם שולחים הודעת וואטסאפ, ואני מתאמת איתכם שיחת היכרות קצרה.",
   },
 ];
 
@@ -225,7 +225,7 @@ function ContactIcon({ name }: { name: ContactIconName }) {
 function TrustIcon() {
   return (
     <svg className="trust-icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
-      <path d="M12 3.75 14.2 8.2l4.91.72-3.55 3.46.84 4.89L12 14.96l-4.4 2.31.84-4.89L4.89 8.92l4.91-.72L12 3.75Z" />
+      <path d="M20 6.75 9.6 17.15 4.75 12.3" />
     </svg>
   );
 }
@@ -368,15 +368,6 @@ export default function Home() {
               שאלות נפוצות
             </a>
           </nav>
-
-          <a
-            className="button button-small header-cta"
-            href={whatsappMessage}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            לתיאום שיחת היכרות בוואטסאפ
-          </a>
         </div>
       </header>
 
@@ -436,7 +427,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section soft-section reveal-item" aria-labelledby="need-title">
+        <section className="section soft-section need-section reveal-item" aria-labelledby="need-title">
           <div className="container narrow">
             <h2 id="need-title">אולי גם אצלכם בבית...</h2>
             <div className="emotion-list">
@@ -450,9 +441,6 @@ export default function Home() {
               הקושי אינו אומר שנכשלתם כהורים. הוא מסמן שאולי הגיע הזמן למצוא דרך
               חדשה להיפגש בבית.
             </p>
-            <a className="button" href={whatsappMessage} target="_blank" rel="noopener noreferrer">
-              לתיאום שיחת היכרות בוואטסאפ
-            </a>
           </div>
         </section>
 
@@ -486,7 +474,7 @@ export default function Home() {
               ))}
             </div>
             <p className="fit-note">
-              הליווי מתאים לאימהות, לאבות ולזוגות הורים. גם כאשר רק הורה אחד
+              אני מלווה אימהות, אבות וזוגות הורים. גם כאשר רק הורה אחד
               משתתף, הוא יכול להתחיל שינוי משמעותי במערכת המשפחתית.
             </p>
           </div>
@@ -838,7 +826,7 @@ export default function Home() {
       >
         <ContactIcon name="whatsapp" />
         <span className="sticky-short">שיחת היכרות בוואטסאפ</span>
-        <span className="sticky-full">לתיאום שיחת היכרות בוואטסאפ</span>
+        <span className="sticky-full">כתבו לי בוואטסאפ</span>
       </a>
 
       <footer className="site-footer">

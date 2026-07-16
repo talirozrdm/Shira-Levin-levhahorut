@@ -17,6 +17,9 @@
   --shadow: 0 18px 45px rgb(74 42 115 / 0.12);
   --radius: 22px;
   --user-font-scale: 1;
+  --body-copy-size: calc(18px * var(--user-font-scale));
+  --body-copy-line-height: 1.72;
+  --body-copy-weight: 400;
 }
 
 * {
@@ -39,8 +42,8 @@ body {
     "Noto Sans Hebrew",
     "Segoe UI",
     sans-serif;
-  font-size: calc(16px * var(--user-font-scale));
-  line-height: 1.75;
+  font-size: var(--body-copy-size);
+  line-height: var(--body-copy-line-height);
   padding-bottom: 74px;
 }
 
@@ -290,10 +293,6 @@ textarea {
   font-size: 0.92rem;
 }
 
-.header-cta {
-  display: none;
-}
-
 .hero {
   position: relative;
   overflow: hidden;
@@ -354,8 +353,11 @@ h3 {
 }
 
 p {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   color: var(--muted);
+  font-size: var(--body-copy-size);
+  font-weight: var(--body-copy-weight);
+  line-height: var(--body-copy-line-height);
 }
 
 .hero-kicker {
@@ -380,8 +382,9 @@ p {
   border-inline-start: 3px solid var(--gold);
   color: var(--purple-dark);
   padding-inline-start: 12px;
-  font-size: 1.08rem;
-  font-weight: 800;
+  font-size: var(--body-copy-size);
+  font-weight: 700;
+  line-height: var(--body-copy-line-height);
 }
 
 .hero-actions {
@@ -442,7 +445,7 @@ p {
 .trust-strip {
   border-block: 1px solid var(--border);
   background: #fff;
-  padding: 16px 0;
+  padding: 14px 0;
 }
 
 .trust-grid {
@@ -453,14 +456,14 @@ p {
 
 .trust-item {
   display: grid;
-  grid-template-columns: 26px 1fr;
-  gap: 4px 10px;
+  grid-template-columns: 22px 1fr;
+  gap: 2px 10px;
   align-items: start;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: rgb(252 248 253 / 0.74);
+  border: 1px solid rgb(234 220 241 / 0.82);
+  border-radius: 12px;
+  background: rgb(252 248 253 / 0.46);
   color: var(--purple-dark);
-  padding: 12px;
+  padding: 13px 12px;
   cursor: default;
 }
 
@@ -473,19 +476,32 @@ p {
 .trust-item span {
   grid-column: 2;
   color: var(--muted);
-  font-size: 0.88rem;
-  line-height: 1.45;
+  font-size: var(--body-copy-size);
+  font-weight: var(--body-copy-weight);
+  line-height: var(--body-copy-line-height);
 }
 
 .trust-icon {
-  width: 18px;
-  height: 18px;
-  margin-top: 0.16em;
-  fill: var(--gold);
+  width: 17px;
+  height: 17px;
+  margin-top: 0.2em;
+  fill: none;
+  stroke: var(--sage-dark);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.3;
 }
 
 .soft-section {
   background: var(--cream);
+}
+
+.need-section {
+  padding-block: clamp(32px, 4.6vw, 54px);
+}
+
+.need-section .section-summary {
+  margin-bottom: 0;
 }
 
 .tinted-section {
@@ -500,7 +516,7 @@ p {
 .emotion-list {
   display: grid;
   gap: 8px 18px;
-  margin: 22px 0;
+  margin: 16px 0 12px;
 }
 
 .emotion-list p {
@@ -508,7 +524,7 @@ p {
   margin: 0;
   padding-inline-start: 22px;
   color: var(--ink);
-  font-weight: 700;
+  font-weight: var(--body-copy-weight);
 }
 
 .emotion-list p::before {
@@ -564,9 +580,9 @@ p {
 
 .fit-note,
 .list-intro {
-  margin-top: 18px;
+  margin-top: 16px;
   color: var(--purple-dark);
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .check-list {
@@ -580,6 +596,9 @@ p {
 .check-list li {
   position: relative;
   padding-inline-start: 30px;
+  font-size: var(--body-copy-size);
+  font-weight: var(--body-copy-weight);
+  line-height: var(--body-copy-line-height);
 }
 
 .check-list li::before {
@@ -656,7 +675,7 @@ p {
 .process-list p {
   margin: 0;
   color: var(--ink);
-  font-weight: 700;
+  font-weight: var(--body-copy-weight);
 }
 
 .testimonials.is-pending {
@@ -729,6 +748,12 @@ p {
   max-height: 220px;
   padding: 0 18px 18px;
   opacity: 1;
+}
+
+.faq-panel p {
+  font-size: var(--body-copy-size);
+  font-weight: var(--body-copy-weight);
+  line-height: var(--body-copy-line-height);
 }
 
 .final-cta {
@@ -877,9 +902,9 @@ p {
 .contact-link small {
   overflow: hidden;
   color: var(--muted);
-  font-size: 0.88rem;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: var(--body-copy-size);
+  font-weight: var(--body-copy-weight);
+  line-height: var(--body-copy-line-height);
   text-overflow: ellipsis;
 }
 
@@ -1057,7 +1082,7 @@ p {
 
 .creator-footer p {
   margin: 0 0 8px;
-  font-size: 0.92rem;
+  font-size: var(--body-copy-size);
 }
 
 .creator-footer a {
@@ -1111,10 +1136,6 @@ p {
     grid-column: auto;
     justify-content: center;
     padding: 0;
-  }
-
-  .header-cta {
-    display: inline-flex;
   }
 
   .hero-grid,
