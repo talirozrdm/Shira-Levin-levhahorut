@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 const whatsappMessage =
   "https://wa.me/972507532044?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A9%D7%99%D7%A8%D7%94%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%20%D7%9C%D7%91%20%D7%94%D7%94%D7%95%D7%A8%D7%95%D7%AA%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA";
@@ -9,11 +9,26 @@ const instagramUrl = "https://www.instagram.com/shira_goldman_levin/";
 const facebookUrl = "https://www.facebook.com/shira.goldmanlevin?locale=he_IL";
 
 const trustItems = [
-  "5 שנות ניסיון",
-  "הכשרה במכון אדלר",
-  "התמחות בהדרכת הורים למתבגרים",
-  "התמחות בליווי הורים לילדים על הרצף האוטיסטי",
-  "ליווי בזום בכל הארץ",
+  {
+    title: "5 שנות ניסיון",
+    text: "בליווי הורים ומשפחות",
+  },
+  {
+    title: "גישת אדלר",
+    text: "הדרכת הורים והנחיית קבוצות",
+  },
+  {
+    title: "התמחות במתבגרים",
+    text: "ליווי הורים בגיל ההתבגרות",
+  },
+  {
+    title: "התמחות ברצף האוטיסטי",
+    text: "ליווי מותאם לצורכי המשפחה",
+  },
+  {
+    title: "ליווי אונליין",
+    text: "בזום בכל הארץ",
+  },
 ];
 
 const principles = [
@@ -141,6 +156,17 @@ const jsonLd = {
       },
       sameAs: [instagramUrl, facebookUrl],
     },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
   ],
 };
 
@@ -163,6 +189,13 @@ const defaultPreferences: Preferences = {
 };
 
 type ContactIconName = "whatsapp" | "phone" | "mail" | "instagram" | "facebook";
+type FormErrors = Partial<Record<"name" | "phone" | "childAge" | "privacy", string>>;
+
+const directWhatsappLabel = "שלחו לי הודעה בוואטסאפ";
+const directPhoneLabel = "התקשרו אליי";
+const directEmailLabel = "שלחו לי מייל";
+const instagramLabel = "לעמוד האינסטגרם";
+const facebookLabel = "לעמוד הפייסבוק";
 
 function ContactIcon({ name }: { name: ContactIconName }) {
   const paths: Record<ContactIconName, string> = {
@@ -190,13 +223,34 @@ function ContactIcon({ name }: { name: ContactIconName }) {
   );
 }
 
+function TrustIcon() {
+  return (
+    <svg className="trust-icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+      <path d="M12 3.75 14.2 8.2l4.91.72-3.55 3.46.84 4.89L12 14.96l-4.4 2.31.84-4.89L4.89 8.92l4.91-.72L12 3.75Z" />
+    </svg>
+  );
+}
+
+function AccessibilityIcon() {
+  return (
+    <svg className="accessibility-icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+      <path d="M12 4.4a1.65 1.65 0 1 1 0 3.3 1.65 1.65 0 0 1 0-3.3Zm-5.9 5.1c0-.5.4-.9.9-.9h10c.5 0 .9.4.9.9s-.4.9-.9.9h-3.75v2.15l1.9 5.25a.9.9 0 0 1-1.7.6L12 14.4l-1.45 4a.9.9 0 0 1-1.7-.6l1.9-5.25V10.4H7a.9.9 0 0 1-.9-.9Z" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [status, setStatus] = useState("");
-  const [statusType, setStatusType] = useState<"success" | "error" | "">("");
+  const [statusType, setStatusType] = useState<"error" | "">("");
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [preferences, setPreferences] = useState(defaultPreferences);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const childAgeRef = useRef<HTMLInputElement>(null);
+  const privacyRef = useRef<HTMLInputElement>(null);
 
   const bodyClass = useMemo(
     () =>
@@ -224,6 +278,36 @@ export default function Home() {
     };
   }, [bodyClass, preferences.scale]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    const items = Array.from(document.querySelectorAll<HTMLElement>(".reveal-item"));
+
+    if (!items.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      items.forEach((item) => item.classList.add("is-visible"));
+      return;
+    }
+
+    root.classList.add("reveal-ready");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+    );
+
+    items.forEach((item) => observer.observe(item));
+
+    return () => {
+      observer.disconnect();
+      root.classList.remove("reveal-ready");
+    };
+  }, []);
+
   const updatePreference = (key: keyof Preferences, value: boolean | number) => {
     setPreferences((current) => ({ ...current, [key]: value }));
   };
@@ -237,16 +321,35 @@ export default function Home() {
     const childAge = String(formData.get("childAge") || "").trim();
     const privacy = formData.get("privacy");
 
-    if (!name || !phone || !childAge || !privacy) {
-      setStatus("חסרים פרטים בטופס. אנא מלאו שם, טלפון, גיל ואישור מדיניות פרטיות.");
+    const nextErrors: FormErrors = {};
+    if (!name) nextErrors.name = "אנא מלאו שם מלא.";
+    if (!phone) nextErrors.phone = "אנא מלאו מספר טלפון לחזרה.";
+    if (!childAge) nextErrors.childAge = "אנא ציינו את גיל הילד, הילדה או הילדים.";
+    if (!privacy) nextErrors.privacy = "יש לאשר את מדיניות הפרטיות לפני שליחת הפרטים.";
+
+    setFormErrors(nextErrors);
+
+    const firstError = (["name", "phone", "childAge", "privacy"] as const).find(
+      (field) => nextErrors[field],
+    );
+
+    if (firstError) {
+      setStatus("יש להשלים את השדות המסומנים לפני שליחת הטופס.");
       setStatusType("error");
+      const refs = {
+        name: nameRef,
+        phone: phoneRef,
+        childAge: childAgeRef,
+        privacy: privacyRef,
+      };
+      refs[firstError].current?.focus();
       return;
     }
 
     setStatus(
-      "הטופס מוכן, אך עדיין לא מחובר לשירות שליחה. בשלב הפרסום יש לחבר אותו לספק טפסים או לשליחה מאובטחת.",
+      "הטופס עדיין לא מחובר לשירות שליחה מאושר. בשלב זה מומלץ לפנות בוואטסאפ, בטלפון או במייל.",
     );
-    setStatusType("success");
+    setStatusType("error");
   };
 
   return (
@@ -275,9 +378,9 @@ export default function Home() {
                 decoding="async"
               />
             </span>
-            <span>
-              <strong>לב ההורות</strong>
-              <small>שירה לוין</small>
+            <span className="brand-text">
+              <strong>שירה לוין</strong>
+              <small>הדרכת הורים</small>
             </span>
           </a>
 
@@ -369,15 +472,19 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="trust-strip" aria-label="פרטי אמון">
+        <section className="trust-strip reveal-item" aria-label="פרטי אמון">
           <div className="container trust-grid">
             {trustItems.map((item) => (
-              <span key={item}>{item}</span>
+              <div className="trust-item" key={item.title}>
+                <TrustIcon />
+                <strong>{item.title}</strong>
+                <span>{item.text}</span>
+              </div>
             ))}
           </div>
         </section>
 
-        <section className="section soft-section" aria-labelledby="need-title">
+        <section className="section soft-section reveal-item" aria-labelledby="need-title">
           <div className="container narrow">
             <h2 id="need-title">אולי גם אצלכם בבית...</h2>
             <div className="emotion-list">
@@ -397,7 +504,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" aria-labelledby="principles-title">
+        <section className="section reveal-item" aria-labelledby="principles-title">
           <div className="container">
             <div className="section-heading">
               <p className="eyebrow">הגישה המקצועית</p>
@@ -414,7 +521,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section tinted-section" id="fit" aria-labelledby="fit-title">
+        <section className="section tinted-section reveal-item" id="fit" aria-labelledby="fit-title">
           <div className="container">
             <div className="section-heading">
               <p className="eyebrow">למי מתאים</p>
@@ -435,7 +542,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" id="help" aria-labelledby="help-title">
+        <section className="section reveal-item" id="help" aria-labelledby="help-title">
           <div className="container">
             <div className="section-heading">
               <p className="eyebrow">איך אני יכולה לעזור</p>
@@ -452,7 +559,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section service-highlight" id="services" aria-labelledby="services-title">
+        <section className="section service-highlight reveal-item" id="services" aria-labelledby="services-title">
           <div className="container service-grid">
             <div>
               <p className="eyebrow">השירות המרכזי</p>
@@ -482,7 +589,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" id="process" aria-labelledby="process-title">
+        <section className="section reveal-item" id="process" aria-labelledby="process-title">
           <div className="container">
             <div className="section-heading">
               <p className="eyebrow">הדרך בפועל</p>
@@ -499,7 +606,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section soft-section" aria-labelledby="strengthen-title">
+        <section className="section soft-section reveal-item" aria-labelledby="strengthen-title">
           <div className="container split">
             <div>
               <p className="eyebrow">מה נרצה לחזק</p>
@@ -519,7 +626,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" id="about" aria-labelledby="about-title">
+        <section className="section reveal-item" id="about" aria-labelledby="about-title">
           <div className="container about-grid">
             <figure className="image-card about-image">
               <img
@@ -565,7 +672,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" id="faq" aria-labelledby="faq-title">
+        <section className="section reveal-item" id="faq" aria-labelledby="faq-title">
           <div className="container narrow">
             <div className="section-heading">
               <p className="eyebrow">שאלות נפוצות</p>
@@ -594,7 +701,8 @@ export default function Home() {
                       id={panelId}
                       role="region"
                       aria-labelledby={buttonId}
-                      hidden={!isOpen}
+                      aria-hidden={!isOpen}
+                      className={isOpen ? "faq-panel is-open" : "faq-panel"}
                     >
                       <p>{item.answer}</p>
                     </div>
@@ -605,7 +713,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section final-cta" aria-labelledby="final-title">
+        <section className="section final-cta reveal-item" aria-labelledby="final-title">
           <div className="container narrow">
             <h2 id="final-title">כל שינוי גדול מתחיל בצעד קטן</h2>
             <p>
@@ -619,13 +727,16 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section contact-section" id="contact" aria-labelledby="contact-title">
-          <div className="container contact-grid">
-            <div>
+        <section className="section contact-section reveal-item" id="contact" aria-labelledby="contact-title">
+          <div className="container">
+            <div className="contact-panel">
+            <div className="contact-actions">
               <p className="eyebrow">יצירת קשר</p>
               <h2 id="contact-title">אפשר להתחיל בהודעה קצרה</h2>
-              <p>שלחו הודעה, ושירה תחזור אליכם לתיאום שיחת היכרות קצרה.</p>
-              <div className="contact-list" aria-label="אפשרויות יצירת קשר">
+              <p>אפשר לפנות בוואטסאפ, בטלפון או בטופס. שירה תחזור אליכם לתיאום שיחת היכרות קצרה.</p>
+
+              <div className="contact-group" aria-label="יצירת קשר ישירה">
+                <h3>דברו איתי</h3>
                 <a
                   className="contact-link contact-link-primary"
                   href={whatsappMessage}
@@ -636,54 +747,60 @@ export default function Home() {
                 >
                   <ContactIcon name="whatsapp" />
                   <span>
-                    <strong>וואטסאפ</strong>
+                    <strong>{directWhatsappLabel}</strong>
                     <small>לתיאום שיחת היכרות</small>
                   </span>
                 </a>
                 <a className="contact-link" href="tel:+972507532044" data-track="click_phone">
                   <ContactIcon name="phone" />
                   <span>
-                    <strong>טלפון</strong>
-                    <small>050-753-2044</small>
+                    <strong>{directPhoneLabel}</strong>
+                    <small dir="ltr">050-753-2044</small>
                   </span>
                 </a>
                 <a className="contact-link" href="mailto:shumi25@gmail.com">
                   <ContactIcon name="mail" />
                   <span>
-                    <strong>מייל</strong>
-                    <small>shumi25@gmail.com</small>
+                    <strong>{directEmailLabel}</strong>
+                    <small dir="ltr">shumi25@gmail.com</small>
                   </span>
                 </a>
+              </div>
+
+              <div className="contact-group social-group" aria-label="רשתות חברתיות">
+                <h3>עקבו אחרי לב ההורות</h3>
+                <div className="social-grid">
                 <a
-                  className="contact-link social-link"
+                  className="contact-link social-link instagram-link"
                   href={instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="אינסטגרם של שירה לוין"
+                  aria-label="מעבר לעמוד האינסטגרם של שירה לוין"
                   data-track="open_instagram"
                 >
                   <ContactIcon name="instagram" />
                   <span>
-                    <strong>אינסטגרם</strong>
-                    <small>@shira_goldman_levin</small>
+                    <strong>{instagramLabel}</strong>
+                    <small dir="ltr">@shira_goldman_levin</small>
                   </span>
                 </a>
                 <a
-                  className="contact-link social-link"
+                  className="contact-link social-link facebook-link"
                   href={facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="פייסבוק של שירה גולדמן לוין"
+                  aria-label="מעבר לעמוד הפייסבוק של שירה גולדמן לוין"
                   data-track="open_facebook"
                 >
                   <ContactIcon name="facebook" />
                   <span>
-                    <strong>פייסבוק</strong>
+                    <strong>{facebookLabel}</strong>
                     <small>שירה גולדמן לוין</small>
                   </span>
                 </a>
+                </div>
               </div>
-            </div>
+              </div>
 
             <form
               className="contact-form"
@@ -692,10 +809,27 @@ export default function Home() {
               noValidate
               onSubmit={submitContact}
             >
-              {/* TODO: connect form to approved backend or form service */}
+              {/* TODO: confirm final form destination and connect approved form service */}
+              <p className="form-disclaimer">
+                הטופס עדיין לא מחובר לשירות שליחה מאושר. עד לחיבור, אפשר לפנות ישירות בוואטסאפ, בטלפון או במייל.
+              </p>
               <div className="field">
                 <label htmlFor="name">שם מלא</label>
-                <input id="name" name="name" type="text" autoComplete="name" required />
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  ref={nameRef}
+                  aria-invalid={Boolean(formErrors.name)}
+                  aria-describedby={formErrors.name ? "name-error" : undefined}
+                />
+                {formErrors.name ? (
+                  <p className="field-error" id="name-error">
+                    {formErrors.name}
+                  </p>
+                ) : null}
               </div>
               <div className="field">
                 <label htmlFor="phone">טלפון</label>
@@ -706,23 +840,57 @@ export default function Home() {
                   autoComplete="tel"
                   inputMode="tel"
                   required
+                  ref={phoneRef}
+                  aria-invalid={Boolean(formErrors.phone)}
+                  aria-describedby={formErrors.phone ? "phone-error" : undefined}
                 />
+                {formErrors.phone ? (
+                  <p className="field-error" id="phone-error">
+                    {formErrors.phone}
+                  </p>
+                ) : null}
               </div>
               <div className="field">
                 <label htmlFor="childAge">גיל הילד, הילדה או הילדים</label>
-                <input id="childAge" name="childAge" type="text" required />
+                <input
+                  id="childAge"
+                  name="childAge"
+                  type="text"
+                  required
+                  ref={childAgeRef}
+                  aria-invalid={Boolean(formErrors.childAge)}
+                  aria-describedby={formErrors.childAge ? "childAge-error" : undefined}
+                />
+                {formErrors.childAge ? (
+                  <p className="field-error" id="childAge-error">
+                    {formErrors.childAge}
+                  </p>
+                ) : null}
               </div>
               <div className="field">
                 <label htmlFor="message">הודעה</label>
-                <textarea id="message" name="message" rows={4} />
+                <textarea id="message" name="message" rows={3} />
               </div>
               <label className="checkbox-field" htmlFor="privacy">
-                <input id="privacy" name="privacy" type="checkbox" required />
+                <input
+                  id="privacy"
+                  name="privacy"
+                  type="checkbox"
+                  required
+                  ref={privacyRef}
+                  aria-invalid={Boolean(formErrors.privacy)}
+                  aria-describedby={formErrors.privacy ? "privacy-error" : undefined}
+                />
                 <span>
                   קראתי את <a href="/privacy.html">מדיניות הפרטיות</a> ואני מאשר/ת
                   את שליחת הפרטים לצורך יצירת קשר.
                 </span>
               </label>
+              {formErrors.privacy ? (
+                <p className="field-error checkbox-error" id="privacy-error">
+                  {formErrors.privacy}
+                </p>
+              ) : null}
               <button className="button" type="submit" data-track="submit_contact_form">
                 שליחת פרטים
               </button>
@@ -733,8 +901,9 @@ export default function Home() {
               >
                 {status}
               </p>
-              <p className="form-note">שירה תחזור אליכם בהקדם לתיאום שיחת היכרות קצרה.</p>
+              <p className="form-note">לאחר שליחת הפרטים, שירה תחזור אליכם לתיאום שיחת היכרות קצרה.</p>
             </form>
+            </div>
           </div>
         </section>
 
@@ -745,10 +914,12 @@ export default function Home() {
           className="accessibility-trigger"
           type="button"
           aria-label="פתיחת תפריט נגישות"
+          title="אפשרויות נגישות"
           aria-expanded={accessibilityOpen}
           aria-controls="accessibility-menu"
           onClick={() => setAccessibilityOpen((value) => !value)}
         >
+          <AccessibilityIcon />
           נגישות
         </button>
         <div
@@ -821,20 +992,22 @@ export default function Home() {
         aria-label="שליחת הודעת וואטסאפ לשירה לוין לתיאום שיחת היכרות"
         data-track="click_whatsapp"
       >
-        לתיאום שיחת היכרות בוואטסאפ
+        <ContactIcon name="whatsapp" />
+        <span className="sticky-short">שיחת היכרות בוואטסאפ</span>
+        <span className="sticky-full">לתיאום שיחת היכרות בוואטסאפ</span>
       </a>
 
       <footer className="site-footer">
-        <div className="container footer-links" aria-label="קישורים משפטיים">
-          <a href="/accessibility.html">
-            <span>הצהרת נגישות</span>
-            <small>התאמות באתר ודרכי פנייה</small>
-          </a>
+        <nav className="container legal-links" aria-label="קישורים משפטיים">
           <a href="/privacy.html">
+            <ContactIcon name="mail" />
             <span>מדיניות פרטיות</span>
-            <small>שימוש בפרטים שנשלחים בטופס</small>
           </a>
-        </div>
+          <a href="/accessibility.html">
+            <AccessibilityIcon />
+            <span>הצהרת נגישות</span>
+          </a>
+        </nav>
         <div className="creator-footer">
           <p>נבנה ועוצב על ידי טלי רוזנברג | אסטרטגיה וצמיחה עסקית</p>
           <p>כרטיסי שיווק דיגיטליים חכמים לעסקים</p>

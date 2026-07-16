@@ -92,7 +92,7 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.doesNotMatch(combined, longDashPattern);
   assert.doesNotMatch(combined, forbiddenCopyPattern);
   assert.match(page, /lev-hahorut-logo-512\.png/);
-  assert.match(page, /TODO: connect form to approved backend or form service/);
+  assert.match(page, /TODO: confirm final form destination and connect approved form service/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
 
   await assert.rejects(

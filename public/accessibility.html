@@ -36,7 +36,7 @@
       .brand { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
       .brand-mark { display: flex; align-items: center; gap: 12px; color: var(--purple); text-decoration: none; }
       .site-logo { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: #fff; padding: 4px; box-shadow: 0 6px 16px rgb(74 42 115 / 0.12); }
-      .site-logo img { height: clamp(48px, 5vw, 76px); width: auto; object-fit: contain; }
+      .site-logo img { height: clamp(54px, 5.5vw, 88px); width: auto; object-fit: contain; }
       img { aspect-ratio: 1; border-radius: 50%; }
       main { padding: clamp(38px, 7vw, 72px) 0; }
       h1, h2 { color: var(--purple); line-height: 1.25; }
@@ -46,6 +46,9 @@
       .panel { border: 1px solid var(--border); border-radius: 18px; background: var(--soft); padding: clamp(22px, 5vw, 34px); }
       footer { border-top: 1px solid var(--border); padding: 30px 0; text-align: center; }
       footer p { margin-bottom: 8px; }
+      .legal-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 22px; }
+      .legal-links a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border: 1px solid var(--purple); border-radius: 999px; background: transparent; padding: 9px 15px; text-decoration: none; }
+      .legal-links a:hover { background: var(--soft); }
     </style>
   </head>
   <body>
@@ -83,6 +86,10 @@
     </main>
     <footer>
       <div class="container">
+        <nav class="legal-links" aria-label="קישורים משפטיים">
+          <a href="/privacy.html">מדיניות פרטיות</a>
+          <a href="/accessibility.html">הצהרת נגישות</a>
+        </nav>
         <p>נבנה ועוצב על ידי טלי רוזנברג | אסטרטגיה וצמיחה עסקית</p>
         <p>כרטיסי שיווק דיגיטליים חכמים לעסקים</p>
         <a href="https://wa.me/message/R774GIXF2DOGP1" target="_blank" rel="noopener noreferrer" aria-label="יצירת קשר עם טלי רוזנברג לבניית כרטיס שיווק דיגיטלי">
