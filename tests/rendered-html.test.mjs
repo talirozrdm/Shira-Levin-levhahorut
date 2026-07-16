@@ -66,7 +66,7 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.match(html, /דילוג לתוכן הראשי/);
   assert.match(html, /aria-controls="site-nav"/);
   assert.match(html, /aria-controls="faq-panel-0"/);
-  assert.match(html, /aria-expanded="true"/);
+  assert.doesNotMatch(html, /aria-expanded="true"/);
   assert.match(html, /aria-label="פתיחת תפריט נגישות"/);
   assert.match(html, /href="\/accessibility\.html"/);
   assert.match(html, /href="\/privacy\.html"/);
@@ -78,6 +78,7 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.doesNotMatch(html, /<form\b/);
   assert.doesNotMatch(html, /שליחת פרטים/);
   assert.doesNotMatch(html, /הטופס עדיין|טופס יצירת קשר/);
+  assert.doesNotMatch(html, /שירה תחזור|שירה מלווה|שירה מתמחה/);
   assert.doesNotMatch(html, /הגישה המקצועית|השירות המרכזי|הדרך בפועל|מה נרצה לחזק|קצת עליי/);
 });
 

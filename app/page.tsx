@@ -11,7 +11,7 @@ const facebookUrl = "https://www.facebook.com/shira.goldmanlevin?locale=he_IL";
 const trustItems = [
   {
     title: "5 שנות ניסיון",
-    text: "בליווי הורים ומשפחות",
+    text: "אני מלווה הורים ומשפחות",
   },
   {
     title: "גישת אדלר",
@@ -19,11 +19,11 @@ const trustItems = [
   },
   {
     title: "התמחות במתבגרים",
-    text: "ליווי הורים בגיל ההתבגרות",
+    text: "אני מלווה הורים בגיל ההתבגרות",
   },
   {
     title: "התמחות ברצף האוטיסטי",
-    text: "ליווי מותאם לצורכי המשפחה",
+    text: "אני מתאימה את הליווי לצורכי המשפחה",
   },
   {
     title: "ליווי אונליין",
@@ -34,57 +34,57 @@ const trustItems = [
 const principles = [
   {
     title: "הורות היא מערכת יחסים, לא פרויקט ניהולי.",
-    text: "שינוי אינו מתחיל בשליטה בילד, אלא בהבנת הקשר והדינמיקה המשפחתית.",
+    text: "אני מאמינה ששינוי אינו מתחיל בשליטה בילד, אלא בהבנת הקשר והדינמיקה המשפחתית.",
   },
   {
     title: "לא צריך להיות הורה חזק, צריך להיות הורה יציב.",
-    text: "ילדים זקוקים להורה עקבי, מוביל ונוכח, לא להורה קשוח יותר.",
+    text: "אני מאמינה שילדים זקוקים להורה עקבי, מוביל ונוכח, לא להורה קשוח יותר.",
   },
   {
     title: "הכול מתחיל ביחסים.",
-    text: "כשיש קשר, שייכות וביטחון, אפשר להציב גבולות ולבנות שיתוף פעולה.",
+    text: "אני רואה שוב ושוב שכאשר יש קשר, שייכות וביטחון, אפשר להציב גבולות ולבנות שיתוף פעולה.",
   },
 ];
 
 const supportAreas = [
   {
     title: "גבולות וסמכות הורית",
-    text: "איך להציב גבולות ברורים בלי להפוך כל בקשה למאבק.",
+    text: "אני עוזרת להציב גבולות ברורים בלי להפוך כל בקשה למאבק.",
   },
   {
     title: "תקשורת וקשר",
-    text: "איך לחזק את הקשר ולנהל שיח גם ברגעים של כעס וריחוק.",
+    text: "אני עוזרת לחזק את הקשר ולנהל שיח גם ברגעים של כעס וריחוק.",
   },
   {
     title: "אתגרי גיל ההתבגרות",
-    text: "תקשורת עם מתבגרים, מסכים, עצמאות, התנגדויות ומאבקי כוח.",
+    text: "אני מלווה סביב תקשורת עם מתבגרים, מסכים, עצמאות, התנגדויות ומאבקי כוח.",
   },
   {
     title: "הורות לילדים על הרצף האוטיסטי",
-    text: "ליווי שמותאם לצורכי הילד, ההורים והמערכת המשפחתית.",
+    text: "אני מתאימה את הליווי לצורכי הילד, ההורים והמערכת המשפחתית.",
   },
 ];
 
 const fitCards = [
   {
     title: "הורים לילדים בגיל בית הספר",
-    text: "גבולות, שיתוף פעולה, מסכים, מריבות בין אחים ותקשורת בבית.",
+    text: "אני מלווה סביב גבולות, שיתוף פעולה, מסכים, מריבות בין אחים ותקשורת בבית.",
   },
   {
     title: "הורים למתבגרים",
-    text: "ריחוק, עצמאות, מאבקי כוח ויצירת תקשורת שמאפשרת גם גבולות וגם קרבה.",
+    text: "אני מלווה סביב ריחוק, עצמאות, מאבקי כוח ויצירת תקשורת שמאפשרת גם גבולות וגם קרבה.",
   },
   {
     title: "הורים לילדים על הרצף האוטיסטי",
-    text: "ליווי מותאם לצרכים הייחודיים של הילד, ההורים והמערכת המשפחתית.",
+    text: "אני מתאימה את הליווי לצרכים הייחודיים של הילד, ההורים והמערכת המשפחתית.",
   },
 ];
 
 const processSteps = [
-  "שולחים הודעה ומתאמים שיחת היכרות קצרה.",
-  "במפגש הראשון ממפים את האתגרים ומגדירים מטרות.",
-  "בכל מפגש מקבלים הבנה, כלים ותרגול מותאם לבית.",
-  "מיישמים בין המפגשים ובוחנים יחד את השינוי.",
+  "אתם שולחים הודעה, ואני מתאמת איתכם שיחת היכרות קצרה.",
+  "במפגש הראשון אני ממפה יחד איתכם את האתגרים ומגדירה מטרות.",
+  "בכל מפגש אני משלבת הבנה, כלים ותרגול מותאם לבית.",
+  "בין המפגשים אתם מיישמים, ובמפגש הבא אנחנו בוחנים יחד את ההתקדמות.",
 ];
 
 const faqItems = [
@@ -114,7 +114,7 @@ const faqItems = [
   {
     question: "האם הליווי מתאים להורים למתבגרים?",
     answer:
-      "כן. שירה מתמחה בליווי הורים למתבגרים ובתקשורת בתקופה שבה הילדים מפתחים עצמאות וזהות.",
+      "כן. אני מתמחה בליווי הורים למתבגרים ובתקשורת בתקופה שבה הילדים מפתחים עצמאות וזהות.",
   },
   {
     question: "האם הליווי מתאים להורים לילדים על הרצף האוטיסטי?",
@@ -241,7 +241,7 @@ function AccessibilityIcon() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [preferences, setPreferences] = useState(defaultPreferences);
 
   const bodyClass = useMemo(
@@ -387,10 +387,11 @@ export default function Home() {
               <p className="eyebrow">הדרכת הורים אונליין בגישת אדלר</p>
               <h1 id="hero-title">לב ההורות</h1>
               <p className="hero-kicker">הדרכת הורים שמתחילה ביחסים</p>
-              <p className="hero-identity">שירה לוין, מדריכת הורים ומנחת קבוצות בגישת אדלר</p>
+              <p className="hero-identity">אני שירה לוין, מדריכת הורים ומנחת קבוצות בגישת אדלר</p>
               <p>
-                ליווי אונליין להורים לילדים בגיל בית הספר, למתבגרים ולהורים לילדים
-                על הרצף האוטיסטי, לחיזוק הקשר, הסמכות ההורית והתקשורת בבית.
+                אני מלווה הורים אונליין לילדים בגיל בית הספר, הורים למתבגרים
+                והורים לילדים על הרצף האוטיסטי, כדי לחזק את הקשר, הסמכות ההורית
+                והתקשורת בבית.
               </p>
               <p className="lead-note">
                 הכול מתחיל ביחסים. כשהקשר בין הורה לילד טוב, שיתוף הפעולה גדל.
@@ -408,7 +409,6 @@ export default function Home() {
                   איך נראה התהליך?
                 </a>
               </div>
-              <p className="microcopy">שיחת היכרות קצרה וללא התחייבות</p>
             </div>
 
             <figure className="image-card hero-image">
@@ -513,7 +513,7 @@ export default function Home() {
             <div>
               <h2 id="services-title">הדרכת הורים אישית אונליין</h2>
               <p>
-                תהליך אישי שמחבר בין הבנת הדינמיקה המשפחתית לבין כלים מעשיים
+                בתהליך אישי אני מחברת בין הבנת הדינמיקה המשפחתית לבין כלים מעשיים
                 שאפשר לתרגל בבית, בקצב שמתאים למשפחה שלכם.
               </p>
               <ul className="check-list">
@@ -558,10 +558,10 @@ export default function Home() {
             <div>
               <h2 id="strengthen-title">להוביל את המשפחה מתוך בהירות</h2>
               <p>
-                המטרה היא שתוכלו להבין טוב יותר את הילדים שלכם, להציב גבולות מתוך
+                המטרה שלי היא שתוכלו להבין טוב יותר את הילדים שלכם, להציב גבולות מתוך
                 בהירות ולנהל שיח גם ברגעים מורכבים.
               </p>
-              <p className="list-intro">בתהליך נרצה לחזק:</p>
+              <p className="list-intro">בתהליך אני רוצה לחזק יחד איתכם:</p>
             </div>
             <ul className="check-list">
               <li>יותר ביטחון ומסוגלות הורית</li>
@@ -662,7 +662,7 @@ export default function Home() {
             <h2 id="final-title">כל שינוי גדול מתחיל בצעד קטן</h2>
             <p>
               אם אתם רוצים לחזק את הקשר עם הילדים, להציב גבולות מתוך ביטחון
-              ולהכניס לבית יותר רוגע ושיתוף פעולה, מוזמנים להתחיל בשיחת היכרות
+              ולהכניס לבית יותר רוגע ושיתוף פעולה, אני מזמינה אתכם להתחיל בשיחת היכרות
               קצרה.
             </p>
             <a className="button" href={whatsappMessage} target="_blank" rel="noopener noreferrer">
@@ -674,75 +674,78 @@ export default function Home() {
         <section className="section contact-section reveal-item" id="contact" aria-labelledby="contact-title">
           <div className="container contact-container">
             <div className="contact-panel">
-            <div className="contact-actions">
-              <h2 id="contact-title">אפשר להתחיל בהודעה קצרה</h2>
-              <p>אפשר לפנות בוואטסאפ, בטלפון או במייל. שירה תחזור אליכם לתיאום שיחת היכרות קצרה.</p>
+              <div className="contact-actions">
+                <h2 id="contact-title">אפשר להתחיל בהודעה קצרה</h2>
+                <p>
+                  אפשר לפנות אליי בוואטסאפ, בטלפון או במייל. אחזור אליכם לתיאום
+                  שיחת היכרות קצרה.
+                </p>
 
-              <div className="contact-group" aria-label="יצירת קשר ישירה">
-                <h3>דברו איתי</h3>
-                <a
-                  className="contact-link contact-link-primary"
-                  href={whatsappMessage}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="שליחת הודעת וואטסאפ לשירה לוין"
-                  data-track="click_whatsapp"
-                >
-                  <ContactIcon name="whatsapp" />
-                  <span>
-                    <strong>{directWhatsappLabel}</strong>
-                    <small>לתיאום שיחת היכרות</small>
-                  </span>
-                </a>
-                <a className="contact-link" href="tel:+972507532044" data-track="click_phone">
-                  <ContactIcon name="phone" />
-                  <span>
-                    <strong>{directPhoneLabel}</strong>
-                    <small dir="ltr">050-753-2044</small>
-                  </span>
-                </a>
-                <a className="contact-link" href="mailto:shumi25@gmail.com">
-                  <ContactIcon name="mail" />
-                  <span>
-                    <strong>{directEmailLabel}</strong>
-                    <small dir="ltr">shumi25@gmail.com</small>
-                  </span>
-                </a>
-              </div>
-
-              <div className="contact-group social-group" aria-label="רשתות חברתיות">
-                <h3>עקבו אחרי לב ההורות</h3>
-                <div className="social-grid">
+                <div className="contact-group" aria-label="יצירת קשר ישירה">
+                  <h3>דברו איתי</h3>
                   <a
-                    className="contact-link social-link instagram-link"
-                    href={instagramUrl}
+                    className="contact-link contact-link-primary"
+                    href={whatsappMessage}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="מעבר לעמוד האינסטגרם של שירה לוין"
-                    data-track="open_instagram"
+                    aria-label="שליחת הודעת וואטסאפ לשירה לוין"
+                    data-track="click_whatsapp"
                   >
-                    <ContactIcon name="instagram" />
+                    <ContactIcon name="whatsapp" />
                     <span>
-                      <strong>{instagramLabel}</strong>
-                      <small dir="ltr">@shira_goldman_levin</small>
+                      <strong>{directWhatsappLabel}</strong>
+                      <small>לתיאום שיחת היכרות</small>
                     </span>
                   </a>
-                  <a
-                    className="contact-link social-link facebook-link"
-                    href={facebookUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="מעבר לעמוד הפייסבוק של שירה גולדמן לוין"
-                    data-track="open_facebook"
-                  >
-                    <ContactIcon name="facebook" />
+                  <a className="contact-link" href="tel:+972507532044" data-track="click_phone">
+                    <ContactIcon name="phone" />
                     <span>
-                      <strong>{facebookLabel}</strong>
-                      <small>שירה גולדמן לוין</small>
+                      <strong>{directPhoneLabel}</strong>
+                      <small dir="ltr">050-753-2044</small>
+                    </span>
+                  </a>
+                  <a className="contact-link" href="mailto:shumi25@gmail.com">
+                    <ContactIcon name="mail" />
+                    <span>
+                      <strong>{directEmailLabel}</strong>
+                      <small dir="ltr">shumi25@gmail.com</small>
                     </span>
                   </a>
                 </div>
-              </div>
+
+                <div className="contact-group social-group" aria-label="רשתות חברתיות">
+                  <h3>עקבו אחרי לב ההורות</h3>
+                  <div className="social-grid">
+                    <a
+                      className="contact-link social-link instagram-link"
+                      href={instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="מעבר לעמוד האינסטגרם של שירה לוין"
+                      data-track="open_instagram"
+                    >
+                      <ContactIcon name="instagram" />
+                      <span>
+                        <strong>{instagramLabel}</strong>
+                        <small dir="ltr">@shira_goldman_levin</small>
+                      </span>
+                    </a>
+                    <a
+                      className="contact-link social-link facebook-link"
+                      href={facebookUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="מעבר לעמוד הפייסבוק של שירה גולדמן לוין"
+                      data-track="open_facebook"
+                    >
+                      <ContactIcon name="facebook" />
+                      <span>
+                        <strong>{facebookLabel}</strong>
+                        <small>שירה גולדמן לוין</small>
+                      </span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

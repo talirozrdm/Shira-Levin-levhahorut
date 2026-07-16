@@ -140,7 +140,7 @@ textarea {
 }
 
 .section {
-  padding: clamp(46px, 6.5vw, 82px) 0;
+  padding: clamp(38px, 5.6vw, 66px) 0;
 }
 
 .site-header {
@@ -178,12 +178,20 @@ textarea {
   background: #fff;
   padding: 4px;
   box-shadow: 0 6px 16px rgb(74 42 115 / 0.12);
+  transition:
+    transform 280ms ease,
+    box-shadow 280ms ease;
 }
 
 .site-logo img {
-  height: clamp(54px, 5.5vw, 88px);
+  height: clamp(48px, 5vw, 76px);
   width: auto;
   object-fit: contain;
+}
+
+.brand:hover .site-logo {
+  transform: translateY(-1px);
+  box-shadow: 0 9px 20px rgb(74 42 115 / 0.15);
 }
 
 .brand-logo {
@@ -260,13 +268,13 @@ textarea {
   text-align: center;
   text-decoration: none;
   transition:
-    transform 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
+    transform 280ms ease,
+    background 280ms ease,
+    box-shadow 280ms ease;
 }
 
 .button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   background: var(--purple);
   color: #fff;
   box-shadow: 0 10px 24px rgb(79 61 85 / 0.18);
@@ -306,7 +314,7 @@ textarea {
 
 .hero-grid {
   align-items: center;
-  gap: clamp(24px, 5vw, 72px);
+  gap: clamp(24px, 4.2vw, 56px);
 }
 
 .eyebrow {
@@ -352,7 +360,7 @@ p {
 
 .hero-kicker {
   color: var(--ink);
-  font-size: clamp(1.12rem, 3.8vw, 1.55rem);
+  font-size: clamp(1.2rem, 4vw, 1.72rem);
   font-weight: 800;
 }
 
@@ -369,9 +377,9 @@ p {
 
 .lead-note,
 .section-summary {
-  border-inline-start: 4px solid var(--gold);
+  border-inline-start: 3px solid var(--gold);
   color: var(--purple-dark);
-  padding-inline-start: 14px;
+  padding-inline-start: 12px;
   font-size: 1.08rem;
   font-weight: 800;
 }
@@ -387,20 +395,13 @@ p {
 .button .contact-icon,
 .sticky-whatsapp .contact-icon,
 .contact-link .contact-icon {
-  transition: transform 220ms ease;
+  transition: transform 280ms ease;
 }
 
 .button:hover .contact-icon,
 .sticky-whatsapp:hover .contact-icon,
 .contact-link:hover .contact-icon {
   transform: translateX(-3px);
-}
-
-.microcopy {
-  margin-top: 10px;
-  color: var(--sage-dark);
-  font-size: 0.95rem;
-  font-weight: 700;
 }
 
 .image-card {
@@ -429,7 +430,7 @@ p {
 
 .hero-image {
   justify-self: center;
-  width: min(100%, 420px);
+  width: min(100%, 370px);
   max-width: 100%;
 }
 
@@ -441,13 +442,13 @@ p {
 .trust-strip {
   border-block: 1px solid var(--border);
   background: #fff;
-  padding: 20px 0;
+  padding: 16px 0;
 }
 
 .trust-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
+  gap: 10px;
 }
 
 .trust-item {
@@ -455,9 +456,11 @@ p {
   grid-template-columns: 26px 1fr;
   gap: 4px 10px;
   align-items: start;
-  border-block-end: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgb(252 248 253 / 0.74);
   color: var(--purple-dark);
-  padding: 14px 10px;
+  padding: 12px;
   cursor: default;
 }
 
@@ -536,13 +539,13 @@ p {
 .card {
   padding: clamp(20px, 4vw, 30px);
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease;
+    transform 280ms ease,
+    box-shadow 280ms ease,
+    border-color 280ms ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: rgb(185 129 209 / 0.72);
   box-shadow: 0 16px 36px rgb(74 42 115 / 0.11);
 }
@@ -691,17 +694,20 @@ p {
   font-weight: 900;
   text-align: start;
   cursor: pointer;
-  transition: background 180ms ease;
+  transition:
+    background 280ms ease,
+    color 280ms ease;
 }
 
 .faq-item button:hover {
   background: var(--cream);
+  color: var(--purple);
 }
 
 .faq-item button span {
   flex: 0 0 auto;
   font-size: 1.4rem;
-  transition: transform 180ms ease;
+  transition: transform 280ms ease;
 }
 
 .faq-item button[aria-expanded="true"] span {
@@ -756,9 +762,9 @@ p {
   gap: clamp(22px, 4vw, 34px);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: #fff;
-  padding: clamp(22px, 5vw, 38px);
-  box-shadow: 0 16px 44px rgb(74 42 115 / 0.09);
+  background: rgb(255 255 255 / 0.72);
+  padding: clamp(20px, 4vw, 32px);
+  box-shadow: none;
 }
 
 .contact-actions {
@@ -779,7 +785,7 @@ p {
 
 .contact-group {
   display: grid;
-  gap: 10px;
+  gap: 9px;
 }
 
 .contact-group h3 {
@@ -805,10 +811,10 @@ p {
   font-weight: 850;
   text-decoration: none;
   transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
+    transform 280ms ease,
+    border-color 280ms ease,
+    background 280ms ease,
+    box-shadow 280ms ease;
 }
 
 .contact-link:hover {
@@ -1021,15 +1027,17 @@ p {
   text-align: center;
   text-decoration: none;
   transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease;
+    transform 280ms ease,
+    border-color 280ms ease,
+    background 280ms ease,
+    box-shadow 280ms ease;
 }
 
 .legal-links a:hover {
   transform: translateY(-2px);
   border-color: var(--gold);
   background: var(--cream);
+  box-shadow: 0 10px 22px rgb(74 42 115 / 0.08);
 }
 
 .legal-links .contact-icon,
@@ -1073,12 +1081,7 @@ p {
   }
 
   .trust-item {
-    border-block-end: 0;
-    border-inline-end: 1px solid var(--border);
-  }
-
-  .trust-item:last-child {
-    border-inline-end: 0;
+    border: 1px solid var(--border);
   }
 
   .two-columns {
@@ -1123,11 +1126,11 @@ p {
   }
 
   .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.62fr);
+    grid-template-columns: minmax(0, 1.16fr) minmax(300px, 0.52fr);
   }
 
   .hero-image {
-    width: min(480px, 38vw);
+    width: min(410px, 32vw);
   }
 
   .social-grid {
