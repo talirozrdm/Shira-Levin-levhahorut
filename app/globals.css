@@ -156,25 +156,38 @@ textarea {
   grid-template-columns: auto auto 1fr;
   align-items: center;
   gap: 12px;
-  min-height: 72px;
+  min-height: 78px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
   color: var(--purple-dark);
   text-decoration: none;
 }
 
-.brand-logo {
-  width: 54px;
-  height: 54px;
+.site-logo {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
-  object-fit: contain;
   background: #fff;
+  padding: 4px;
   box-shadow: 0 6px 16px rgb(74 42 115 / 0.12);
+}
+
+.site-logo img {
+  height: clamp(48px, 5vw, 76px);
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-logo {
+  aspect-ratio: 1;
+  border-radius: 50%;
 }
 
 .brand strong,
@@ -183,9 +196,13 @@ textarea {
   line-height: 1.2;
 }
 
+.brand strong {
+  font-size: clamp(1.08rem, 2.2vw, 1.28rem);
+}
+
 .brand small {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: clamp(0.84rem, 1.8vw, 0.94rem);
 }
 
 .site-nav {
@@ -331,8 +348,7 @@ p {
   color: var(--muted);
 }
 
-.hero-kicker,
-.hero-subtitle {
+.hero-kicker {
   color: var(--ink);
   font-size: clamp(1.12rem, 3.8vw, 1.55rem);
   font-weight: 800;
@@ -473,6 +489,16 @@ p {
 
 .card {
   padding: clamp(20px, 4vw, 30px);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgb(185 129 209 / 0.72);
+  box-shadow: 0 16px 36px rgb(74 42 115 / 0.11);
 }
 
 .fit-cards .card:nth-child(1) {
@@ -620,11 +646,21 @@ p {
   font-weight: 900;
   text-align: start;
   cursor: pointer;
+  transition: background 180ms ease;
+}
+
+.faq-item button:hover {
+  background: var(--cream);
 }
 
 .faq-item button span {
   flex: 0 0 auto;
   font-size: 1.4rem;
+  transition: transform 180ms ease;
+}
+
+.faq-item button[aria-expanded="true"] span {
+  transform: rotate(180deg);
 }
 
 .faq-item div {
@@ -665,24 +701,58 @@ p {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 46px;
+  min-height: 58px;
   border: 1px solid var(--border);
   border-radius: 14px;
   background: #fff;
   color: var(--purple-dark);
-  padding: 10px 13px;
+  padding: 11px 14px;
   font-weight: 850;
   text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .contact-link:hover {
+  transform: translateY(-2px);
   border-color: var(--gold);
   background: var(--cream);
+  box-shadow: 0 12px 28px rgb(74 42 115 / 0.09);
+}
+
+.contact-link-primary {
+  border-color: rgb(74 42 115 / 0.28);
+  background: linear-gradient(135deg, rgb(243 220 246 / 0.86), #fff);
+}
+
+.social-link {
+  background: #fffefd;
+}
+
+.contact-link span {
+  display: grid;
+  min-width: 0;
+}
+
+.contact-link strong {
+  line-height: 1.2;
+}
+
+.contact-link small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-overflow: ellipsis;
 }
 
 .contact-icon {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   flex: 0 0 auto;
   fill: var(--sage-dark);
 }
@@ -835,11 +905,41 @@ textarea {
 }
 
 .footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 14px;
   margin-bottom: 28px;
+}
+
+.footer-links a {
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--cream);
+  color: var(--purple-dark);
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.footer-links a:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  background: #fff;
+}
+
+.footer-links span {
+  font-weight: 900;
+}
+
+.footer-links small {
+  color: var(--muted);
+  font-weight: 700;
 }
 
 .creator-footer {
@@ -882,6 +982,10 @@ textarea {
 
   .three-columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

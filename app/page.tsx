@@ -162,7 +162,22 @@ const defaultPreferences: Preferences = {
   readableFont: false,
 };
 
-function ContactIcon() {
+type ContactIconName = "whatsapp" | "phone" | "mail" | "instagram" | "facebook";
+
+function ContactIcon({ name }: { name: ContactIconName }) {
+  const paths: Record<ContactIconName, string> = {
+    whatsapp:
+      "M12.04 4.25a7.55 7.55 0 0 0-6.45 11.48l-.72 3.04 3.12-.7a7.55 7.55 0 1 0 4.05-13.82Zm0 1.65a5.9 5.9 0 1 1-3.12 10.91l-.3-.18-1.63.36.38-1.58-.2-.32A5.9 5.9 0 0 1 12.04 5.9Zm-2.3 3.1c-.16 0-.42.06-.64.3-.22.25-.84.83-.84 2.03 0 1.2.86 2.36.98 2.52.12.16 1.68 2.68 4.16 3.65 2.06.8 2.48.64 2.92.6.45-.04 1.44-.6 1.64-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.29-.25-.12-1.44-.72-1.67-.8-.22-.08-.39-.12-.55.13-.16.25-.63.8-.77.96-.14.17-.28.19-.53.06-.24-.12-1.03-.38-1.96-1.22-.73-.65-1.22-1.45-1.36-1.7-.14-.25-.02-.38.1-.5.11-.1.25-.27.37-.41.12-.15.16-.25.24-.42.08-.16.04-.31-.02-.44-.06-.12-.55-1.35-.75-1.84-.2-.47-.4-.4-.55-.4h-.46Z",
+    phone:
+      "M7.15 5.05c.33-.33.87-.33 1.2 0l1.86 1.86c.3.3.33.78.08 1.12l-.86 1.14a.9.9 0 0 0-.06.98 11.1 11.1 0 0 0 4.48 4.48.9.9 0 0 0 .98-.06l1.14-.86c.34-.25.82-.22 1.12.08l1.86 1.86c.33.33.33.87 0 1.2l-.86.86c-.73.73-1.8 1-2.8.72-4.74-1.3-8.42-4.98-9.72-9.72-.28-1 .01-2.07.72-2.8l.86-.86Z",
+    mail:
+      "M5.75 6.75h12.5c.7 0 1.25.56 1.25 1.25v8c0 .69-.56 1.25-1.25 1.25H5.75c-.7 0-1.25-.56-1.25-1.25V8c0-.69.56-1.25 1.25-1.25Zm.55 1.5 5.24 4.1c.27.22.65.22.92 0l5.24-4.1H6.3Zm11.7 1.48-4.62 3.62a2.2 2.2 0 0 1-2.76 0L6 9.73v6.02h12V9.73Z",
+    instagram:
+      "M8.2 4.75h7.6a3.45 3.45 0 0 1 3.45 3.45v7.6a3.45 3.45 0 0 1-3.45 3.45H8.2a3.45 3.45 0 0 1-3.45-3.45V8.2A3.45 3.45 0 0 1 8.2 4.75Zm0 1.6A1.85 1.85 0 0 0 6.35 8.2v7.6c0 1.02.83 1.85 1.85 1.85h7.6a1.85 1.85 0 0 0 1.85-1.85V8.2a1.85 1.85 0 0 0-1.85-1.85H8.2Zm3.8 2.68a2.97 2.97 0 1 1 0 5.94 2.97 2.97 0 0 1 0-5.94Zm0 1.55a1.42 1.42 0 1 0 0 2.84 1.42 1.42 0 0 0 0-2.84Zm3.28-2.38a.72.72 0 1 1 0 1.44.72.72 0 0 1 0-1.44Z",
+    facebook:
+      "M13.15 19.25v-6.38h2.12l.32-2.48h-2.44V8.81c0-.72.2-1.2 1.23-1.2h1.31V5.39a17.5 17.5 0 0 0-1.91-.1c-1.9 0-3.2 1.16-3.2 3.28v1.82H8.44v2.48h2.14v6.38h2.57Z",
+  };
+
   return (
     <svg
       className="contact-icon"
@@ -170,7 +185,7 @@ function ContactIcon() {
       viewBox="0 0 24 24"
       focusable="false"
     >
-      <path d="M12 4.5a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15Zm0 12.2a4.7 4.7 0 1 1 0-9.4 4.7 4.7 0 0 1 0 9.4Z" />
+      <path d={paths[name]} />
     </svg>
   );
 }
@@ -250,14 +265,16 @@ export default function Home() {
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#top" aria-label="לב ההורות, מעבר לראש העמוד">
-            <img
-              src="/assets/lev-hahorut-logo-512.png"
-              alt="לב ההורות - הדרכת הורים עם שירה לוין"
-              width="512"
-              height="512"
-              className="brand-logo"
-              decoding="async"
-            />
+            <span className="site-logo" aria-hidden="true">
+              <img
+                src="/assets/lev-hahorut-logo-512.png"
+                alt=""
+                width="512"
+                height="512"
+                className="brand-logo"
+                decoding="async"
+              />
+            </span>
             <span>
               <strong>לב ההורות</strong>
               <small>שירה לוין</small>
@@ -303,7 +320,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            לתיאום שיחת היכרות
+            לתיאום שיחה בוואטסאפ
           </a>
         </div>
       </header>
@@ -316,10 +333,9 @@ export default function Home() {
               <h1 id="hero-title">לב ההורות</h1>
               <p className="hero-kicker">הדרכת הורים שמתחילה ביחסים</p>
               <p className="hero-identity">שירה לוין, מדריכת הורים ומנחת קבוצות בגישת אדלר</p>
-              <p className="hero-subtitle">חיזוק הקשר, הסמכות ההורית והתקשורת בבית</p>
               <p>
-                אני מלווה הורים לילדים בגיל בית הספר, למתבגרים ולהורים לילדים על
-                הרצף האוטיסטי, בתהליך אישי ואונליין ליצירת בית בטוח, יציב ומחבר.
+                ליווי אונליין להורים לילדים בגיל בית הספר, למתבגרים ולהורים לילדים
+                על הרצף האוטיסטי, לחיזוק הקשר, הסמכות ההורית והתקשורת בבית.
               </p>
               <p className="lead-note">
                 הכול מתחיל ביחסים. כשהקשר בין הורה לילד טוב, שיתוף הפעולה גדל.
@@ -372,8 +388,8 @@ export default function Home() {
               <p>בסוף היום נשארים עם תסכול, אשמה ותחושה שכבר ניסיתם הכול.</p>
             </div>
             <p className="section-summary">
-              הקושי אינו אומר שנכשלתם כהורים. הוא אומר שהמשפחה זקוקה לדרך חדשה
-              להיפגש.
+              הקושי אינו אומר שנכשלתם כהורים. הוא מסמן שאולי הגיע הזמן למצוא דרך
+              חדשה להיפגש בבית.
             </p>
             <a className="button" href={whatsappMessage} target="_blank" rel="noopener noreferrer">
               לתיאום שיחת היכרות בוואטסאפ
@@ -443,7 +459,7 @@ export default function Home() {
               <h2 id="services-title">הדרכת הורים אישית אונליין</h2>
               <p>
                 תהליך אישי שמחבר בין הבנת הדינמיקה המשפחתית לבין כלים מעשיים
-                שאפשר ליישם בבית.
+                שאפשר לתרגל בבית, בקצב שמתאים למשפחה שלכם.
               </p>
               <ul className="check-list">
                 <li>לרוב 8 עד 12 מפגשים, בהתאם לצורך</li>
@@ -490,8 +506,7 @@ export default function Home() {
               <h2 id="strengthen-title">להוביל את המשפחה מתוך בהירות</h2>
               <p>
                 המטרה היא שתוכלו להבין טוב יותר את הילדים שלכם, להציב גבולות מתוך
-                בהירות, לנהל שיח גם ברגעים מורכבים ולהרגיש שוב שאתם יודעים להוביל
-                את המשפחה.
+                בהירות ולנהל שיח גם ברגעים מורכבים.
               </p>
               <p className="list-intro">בתהליך נרצה לחזק:</p>
             </div>
@@ -595,7 +610,7 @@ export default function Home() {
             <h2 id="final-title">כל שינוי גדול מתחיל בצעד קטן</h2>
             <p>
               אם אתם רוצים לחזק את הקשר עם הילדים, להציב גבולות מתוך ביטחון
-              ולהחזיר לבית יותר רוגע ושיתוף פעולה, אני מזמינה אתכם לשיחת היכרות
+              ולהכניס לבית יותר רוגע ושיתוף פעולה, מוזמנים להתחיל בשיחת היכרות
               קצרה.
             </p>
             <a className="button" href={whatsappMessage} target="_blank" rel="noopener noreferrer">
@@ -609,48 +624,63 @@ export default function Home() {
             <div>
               <p className="eyebrow">יצירת קשר</p>
               <h2 id="contact-title">אפשר להתחיל בהודעה קצרה</h2>
-              <p>שלחו לי הודעה ואחזור אליכם לתיאום שיחת היכרות קצרה.</p>
+              <p>שלחו הודעה, ושירה תחזור אליכם לתיאום שיחת היכרות קצרה.</p>
               <div className="contact-list" aria-label="אפשרויות יצירת קשר">
                 <a
-                  className="contact-link"
+                  className="contact-link contact-link-primary"
                   href={whatsappMessage}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="שלחו לי הודעה בוואטסאפ"
+                  aria-label="שליחת הודעת וואטסאפ לשירה לוין"
                   data-track="click_whatsapp"
                 >
-                  <ContactIcon />
-                  <span>שלחו לי הודעה בוואטסאפ</span>
+                  <ContactIcon name="whatsapp" />
+                  <span>
+                    <strong>וואטסאפ</strong>
+                    <small>לתיאום שיחת היכרות</small>
+                  </span>
                 </a>
                 <a className="contact-link" href="tel:+972507532044" data-track="click_phone">
-                  <ContactIcon />
-                  <span>050-753-2044</span>
+                  <ContactIcon name="phone" />
+                  <span>
+                    <strong>טלפון</strong>
+                    <small>050-753-2044</small>
+                  </span>
                 </a>
                 <a className="contact-link" href="mailto:shumi25@gmail.com">
-                  <ContactIcon />
-                  <span>shumi25@gmail.com</span>
+                  <ContactIcon name="mail" />
+                  <span>
+                    <strong>מייל</strong>
+                    <small>shumi25@gmail.com</small>
+                  </span>
                 </a>
                 <a
-                  className="contact-link"
+                  className="contact-link social-link"
                   href={instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="אינסטגרם של שירה לוין"
                   data-track="open_instagram"
                 >
-                  <ContactIcon />
-                  <span>@shira_goldman_levin</span>
+                  <ContactIcon name="instagram" />
+                  <span>
+                    <strong>אינסטגרם</strong>
+                    <small>@shira_goldman_levin</small>
+                  </span>
                 </a>
                 <a
-                  className="contact-link"
+                  className="contact-link social-link"
                   href={facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="פייסבוק של שירה גולדמן לוין"
                   data-track="open_facebook"
                 >
-                  <ContactIcon />
-                  <span>שירה גולדמן לוין</span>
+                  <ContactIcon name="facebook" />
+                  <span>
+                    <strong>פייסבוק</strong>
+                    <small>שירה גולדמן לוין</small>
+                  </span>
                 </a>
               </div>
             </div>
@@ -703,7 +733,7 @@ export default function Home() {
               >
                 {status}
               </p>
-              <p className="form-note">אחזור אליכם בהקדם לתיאום שיחת היכרות קצרה.</p>
+              <p className="form-note">שירה תחזור אליכם בהקדם לתיאום שיחת היכרות קצרה.</p>
             </form>
           </div>
         </section>
@@ -795,9 +825,15 @@ export default function Home() {
       </a>
 
       <footer className="site-footer">
-        <div className="container footer-links">
-          <a href="/accessibility.html">הצהרת נגישות</a>
-          <a href="/privacy.html">מדיניות פרטיות</a>
+        <div className="container footer-links" aria-label="קישורים משפטיים">
+          <a href="/accessibility.html">
+            <span>הצהרת נגישות</span>
+            <small>התאמות באתר ודרכי פנייה</small>
+          </a>
+          <a href="/privacy.html">
+            <span>מדיניות פרטיות</span>
+            <small>שימוש בפרטים שנשלחים בטופס</small>
+          </a>
         </div>
         <div className="creator-footer">
           <p>נבנה ועוצב על ידי טלי רוזנברג | אסטרטגיה וצמיחה עסקית</p>
