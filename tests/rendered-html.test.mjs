@@ -70,13 +70,15 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.match(html, /aria-label="פתיחת תפריט נגישות"/);
   assert.match(html, /href="\/accessibility\.html"/);
   assert.match(html, /href="\/privacy\.html"/);
-  assert.match(html, /aria-live="polite"/);
   assert.match(html, /050-753-2044/);
   assert.match(html, /wa\.me\/972507532044/);
   assert.match(html, /לתיאום שיחת היכרות בוואטסאפ/);
-  assert.match(html, /<label for="name">שם מלא<\/label>/);
-  assert.match(html, /<label for="phone">טלפון<\/label>/);
-  assert.match(html, /<label for="childAge">גיל הילד, הילדה או הילדים<\/label>/);
+  assert.match(html, /שלחו לי הודעה בוואטסאפ/);
+  assert.match(html, /@shira_goldman_levin/);
+  assert.doesNotMatch(html, /<form\b/);
+  assert.doesNotMatch(html, /שליחת פרטים/);
+  assert.doesNotMatch(html, /הטופס עדיין|טופס יצירת קשר/);
+  assert.doesNotMatch(html, /הגישה המקצועית|השירות המרכזי|הדרך בפועל|מה נרצה לחזק|קצת עליי/);
 });
 
 test("keeps starter code and disallowed copy out of the finished page", async () => {
@@ -92,7 +94,7 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.doesNotMatch(combined, longDashPattern);
   assert.doesNotMatch(combined, forbiddenCopyPattern);
   assert.match(page, /lev-hahorut-logo-512\.png/);
-  assert.match(page, /TODO: confirm final form destination and connect approved form service/);
+  assert.doesNotMatch(page, /submitContact|FormEvent|contact-form|aria-invalid|field-error/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
 
   await assert.rejects(

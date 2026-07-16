@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const whatsappMessage =
   "https://wa.me/972507532044?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A9%D7%99%D7%A8%D7%94%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%20%D7%9C%D7%91%20%D7%94%D7%94%D7%95%D7%A8%D7%95%D7%AA%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA";
@@ -189,7 +189,6 @@ const defaultPreferences: Preferences = {
 };
 
 type ContactIconName = "whatsapp" | "phone" | "mail" | "instagram" | "facebook";
-type FormErrors = Partial<Record<"name" | "phone" | "childAge" | "privacy", string>>;
 
 const directWhatsappLabel = "שלחו לי הודעה בוואטסאפ";
 const directPhoneLabel = "התקשרו אליי";
@@ -243,14 +242,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [status, setStatus] = useState("");
-  const [statusType, setStatusType] = useState<"error" | "">("");
-  const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [preferences, setPreferences] = useState(defaultPreferences);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const phoneRef = useRef<HTMLInputElement>(null);
-  const childAgeRef = useRef<HTMLInputElement>(null);
-  const privacyRef = useRef<HTMLInputElement>(null);
 
   const bodyClass = useMemo(
     () =>
@@ -310,46 +302,6 @@ export default function Home() {
 
   const updatePreference = (key: keyof Preferences, value: boolean | number) => {
     setPreferences((current) => ({ ...current, [key]: value }));
-  };
-
-  const submitContact = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const name = String(formData.get("name") || "").trim();
-    const phone = String(formData.get("phone") || "").trim();
-    const childAge = String(formData.get("childAge") || "").trim();
-    const privacy = formData.get("privacy");
-
-    const nextErrors: FormErrors = {};
-    if (!name) nextErrors.name = "אנא מלאו שם מלא.";
-    if (!phone) nextErrors.phone = "אנא מלאו מספר טלפון לחזרה.";
-    if (!childAge) nextErrors.childAge = "אנא ציינו את גיל הילד, הילדה או הילדים.";
-    if (!privacy) nextErrors.privacy = "יש לאשר את מדיניות הפרטיות לפני שליחת הפרטים.";
-
-    setFormErrors(nextErrors);
-
-    const firstError = (["name", "phone", "childAge", "privacy"] as const).find(
-      (field) => nextErrors[field],
-    );
-
-    if (firstError) {
-      setStatus("יש להשלים את השדות המסומנים לפני שליחת הטופס.");
-      setStatusType("error");
-      const refs = {
-        name: nameRef,
-        phone: phoneRef,
-        childAge: childAgeRef,
-        privacy: privacyRef,
-      };
-      refs[firstError].current?.focus();
-      return;
-    }
-
-    setStatus(
-      "הטופס עדיין לא מחובר לשירות שליחה מאושר. בשלב זה מומלץ לפנות בוואטסאפ, בטלפון או במייל.",
-    );
-    setStatusType("error");
   };
 
   return (
@@ -423,7 +375,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            לתיאום שיחה בוואטסאפ
+            לתיאום שיחת היכרות בוואטסאפ
           </a>
         </div>
       </header>
@@ -507,7 +459,6 @@ export default function Home() {
         <section className="section reveal-item" aria-labelledby="principles-title">
           <div className="container">
             <div className="section-heading">
-              <p className="eyebrow">הגישה המקצועית</p>
               <h2 id="principles-title">שלושה עקרונות שמחזיקים את הדרך</h2>
             </div>
             <div className="cards three-columns">
@@ -524,7 +475,6 @@ export default function Home() {
         <section className="section tinted-section reveal-item" id="fit" aria-labelledby="fit-title">
           <div className="container">
             <div className="section-heading">
-              <p className="eyebrow">למי מתאים</p>
               <h2 id="fit-title">למי הליווי מתאים?</h2>
             </div>
             <div className="cards three-columns fit-cards">
@@ -545,7 +495,6 @@ export default function Home() {
         <section className="section reveal-item" id="help" aria-labelledby="help-title">
           <div className="container">
             <div className="section-heading">
-              <p className="eyebrow">איך אני יכולה לעזור</p>
               <h2 id="help-title">במה אני יכולה לעזור?</h2>
             </div>
             <div className="cards two-columns">
@@ -562,7 +511,6 @@ export default function Home() {
         <section className="section service-highlight reveal-item" id="services" aria-labelledby="services-title">
           <div className="container service-grid">
             <div>
-              <p className="eyebrow">השירות המרכזי</p>
               <h2 id="services-title">הדרכת הורים אישית אונליין</h2>
               <p>
                 תהליך אישי שמחבר בין הבנת הדינמיקה המשפחתית לבין כלים מעשיים
@@ -592,7 +540,6 @@ export default function Home() {
         <section className="section reveal-item" id="process" aria-labelledby="process-title">
           <div className="container">
             <div className="section-heading">
-              <p className="eyebrow">הדרך בפועל</p>
               <h2 id="process-title">איך נראה התהליך?</h2>
             </div>
             <ol className="process-list">
@@ -609,7 +556,6 @@ export default function Home() {
         <section className="section soft-section reveal-item" aria-labelledby="strengthen-title">
           <div className="container split">
             <div>
-              <p className="eyebrow">מה נרצה לחזק</p>
               <h2 id="strengthen-title">להוביל את המשפחה מתוך בהירות</h2>
               <p>
                 המטרה היא שתוכלו להבין טוב יותר את הילדים שלכם, להציב גבולות מתוך
@@ -638,7 +584,6 @@ export default function Home() {
               />
             </figure>
             <div>
-              <p className="eyebrow">קצת עליי</p>
               <h2 id="about-title">נעים להכיר, אני שירה לוין</h2>
               <p>
                 אני מדריכת הורים ומנחת קבוצות, ומלווה הורים לילדים ולמתבגרים בדרך
@@ -675,7 +620,6 @@ export default function Home() {
         <section className="section reveal-item" id="faq" aria-labelledby="faq-title">
           <div className="container narrow">
             <div className="section-heading">
-              <p className="eyebrow">שאלות נפוצות</p>
               <h2 id="faq-title">מה הורים שואלים לפני שמתחילים?</h2>
             </div>
             <div className="faq-list">
@@ -728,12 +672,11 @@ export default function Home() {
         </section>
 
         <section className="section contact-section reveal-item" id="contact" aria-labelledby="contact-title">
-          <div className="container">
+          <div className="container contact-container">
             <div className="contact-panel">
             <div className="contact-actions">
-              <p className="eyebrow">יצירת קשר</p>
               <h2 id="contact-title">אפשר להתחיל בהודעה קצרה</h2>
-              <p>אפשר לפנות בוואטסאפ, בטלפון או בטופס. שירה תחזור אליכם לתיאום שיחת היכרות קצרה.</p>
+              <p>אפשר לפנות בוואטסאפ, בטלפון או במייל. שירה תחזור אליכם לתיאום שיחת היכרות קצרה.</p>
 
               <div className="contact-group" aria-label="יצירת קשר ישירה">
                 <h3>דברו איתי</h3>
@@ -770,139 +713,37 @@ export default function Home() {
               <div className="contact-group social-group" aria-label="רשתות חברתיות">
                 <h3>עקבו אחרי לב ההורות</h3>
                 <div className="social-grid">
-                <a
-                  className="contact-link social-link instagram-link"
-                  href={instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="מעבר לעמוד האינסטגרם של שירה לוין"
-                  data-track="open_instagram"
-                >
-                  <ContactIcon name="instagram" />
-                  <span>
-                    <strong>{instagramLabel}</strong>
-                    <small dir="ltr">@shira_goldman_levin</small>
-                  </span>
-                </a>
-                <a
-                  className="contact-link social-link facebook-link"
-                  href={facebookUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="מעבר לעמוד הפייסבוק של שירה גולדמן לוין"
-                  data-track="open_facebook"
-                >
-                  <ContactIcon name="facebook" />
-                  <span>
-                    <strong>{facebookLabel}</strong>
-                    <small>שירה גולדמן לוין</small>
-                  </span>
-                </a>
+                  <a
+                    className="contact-link social-link instagram-link"
+                    href={instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="מעבר לעמוד האינסטגרם של שירה לוין"
+                    data-track="open_instagram"
+                  >
+                    <ContactIcon name="instagram" />
+                    <span>
+                      <strong>{instagramLabel}</strong>
+                      <small dir="ltr">@shira_goldman_levin</small>
+                    </span>
+                  </a>
+                  <a
+                    className="contact-link social-link facebook-link"
+                    href={facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="מעבר לעמוד הפייסבוק של שירה גולדמן לוין"
+                    data-track="open_facebook"
+                  >
+                    <ContactIcon name="facebook" />
+                    <span>
+                      <strong>{facebookLabel}</strong>
+                      <small>שירה גולדמן לוין</small>
+                    </span>
+                  </a>
                 </div>
               </div>
               </div>
-
-            <form
-              className="contact-form"
-              action="#"
-              method="post"
-              noValidate
-              onSubmit={submitContact}
-            >
-              {/* TODO: confirm final form destination and connect approved form service */}
-              <p className="form-disclaimer">
-                הטופס עדיין לא מחובר לשירות שליחה מאושר. עד לחיבור, אפשר לפנות ישירות בוואטסאפ, בטלפון או במייל.
-              </p>
-              <div className="field">
-                <label htmlFor="name">שם מלא</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  ref={nameRef}
-                  aria-invalid={Boolean(formErrors.name)}
-                  aria-describedby={formErrors.name ? "name-error" : undefined}
-                />
-                {formErrors.name ? (
-                  <p className="field-error" id="name-error">
-                    {formErrors.name}
-                  </p>
-                ) : null}
-              </div>
-              <div className="field">
-                <label htmlFor="phone">טלפון</label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  inputMode="tel"
-                  required
-                  ref={phoneRef}
-                  aria-invalid={Boolean(formErrors.phone)}
-                  aria-describedby={formErrors.phone ? "phone-error" : undefined}
-                />
-                {formErrors.phone ? (
-                  <p className="field-error" id="phone-error">
-                    {formErrors.phone}
-                  </p>
-                ) : null}
-              </div>
-              <div className="field">
-                <label htmlFor="childAge">גיל הילד, הילדה או הילדים</label>
-                <input
-                  id="childAge"
-                  name="childAge"
-                  type="text"
-                  required
-                  ref={childAgeRef}
-                  aria-invalid={Boolean(formErrors.childAge)}
-                  aria-describedby={formErrors.childAge ? "childAge-error" : undefined}
-                />
-                {formErrors.childAge ? (
-                  <p className="field-error" id="childAge-error">
-                    {formErrors.childAge}
-                  </p>
-                ) : null}
-              </div>
-              <div className="field">
-                <label htmlFor="message">הודעה</label>
-                <textarea id="message" name="message" rows={3} />
-              </div>
-              <label className="checkbox-field" htmlFor="privacy">
-                <input
-                  id="privacy"
-                  name="privacy"
-                  type="checkbox"
-                  required
-                  ref={privacyRef}
-                  aria-invalid={Boolean(formErrors.privacy)}
-                  aria-describedby={formErrors.privacy ? "privacy-error" : undefined}
-                />
-                <span>
-                  קראתי את <a href="/privacy.html">מדיניות הפרטיות</a> ואני מאשר/ת
-                  את שליחת הפרטים לצורך יצירת קשר.
-                </span>
-              </label>
-              {formErrors.privacy ? (
-                <p className="field-error checkbox-error" id="privacy-error">
-                  {formErrors.privacy}
-                </p>
-              ) : null}
-              <button className="button" type="submit" data-track="submit_contact_form">
-                שליחת פרטים
-              </button>
-              <p
-                className={statusType ? `form-status ${statusType}` : "form-status"}
-                role="status"
-                aria-live="polite"
-              >
-                {status}
-              </p>
-              <p className="form-note">לאחר שליחת הפרטים, שירה תחזור אליכם לתיאום שיחת היכרות קצרה.</p>
-            </form>
             </div>
           </div>
         </section>
