@@ -54,7 +54,10 @@ test("renders the Hebrew RTL landing page with SEO essentials", async () => {
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
   assert.match(html, /type="application\/ld\+json"/);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
-  assert.match(html, /לב ההורות - הדרכת הורים שמתחילה ביחסים/);
+  assert.match(html, /<h1 id="hero-title">לב ההורות<\/h1>/);
+  assert.match(html, /הדרכת הורים שמתחילה ביחסים/);
+  assert.match(html, /shira-levin-hero\.webp/);
+  assert.match(html, /shira-levin-about\.webp/);
 });
 
 test("includes conversion, accessibility, and privacy affordances", async () => {
@@ -65,15 +68,15 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.match(html, /aria-controls="faq-panel-0"/);
   assert.match(html, /aria-expanded="true"/);
   assert.match(html, /aria-label="פתיחת תפריט נגישות"/);
-  assert.match(html, /הצהרת נגישות/);
-  assert.match(html, /מדיניות פרטיות/);
+  assert.match(html, /href="\/accessibility\.html"/);
+  assert.match(html, /href="\/privacy\.html"/);
   assert.match(html, /aria-live="polite"/);
   assert.match(html, /050-753-2044/);
   assert.match(html, /wa\.me\/972507532044/);
   assert.match(html, /לתיאום שיחת היכרות בוואטסאפ/);
   assert.match(html, /<label for="name">שם מלא<\/label>/);
   assert.match(html, /<label for="phone">טלפון<\/label>/);
-  assert.match(html, /<label for="childAge">גיל הילד\/ה או הילדים<\/label>/);
+  assert.match(html, /<label for="childAge">גיל הילד, הילדה או הילדים<\/label>/);
 });
 
 test("keeps starter code and disallowed copy out of the finished page", async () => {
@@ -89,7 +92,7 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.doesNotMatch(combined, longDashPattern);
   assert.doesNotMatch(combined, forbiddenCopyPattern);
   assert.match(page, /lev-hahorut-logo-512\.png/);
-  assert.match(page, /TODO: connect this form to a real form service/);
+  assert.match(page, /TODO: connect form to approved backend or form service/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
 
   await assert.rejects(

@@ -139,7 +139,7 @@ textarea {
 }
 
 .section {
-  padding: clamp(58px, 8vw, 104px) 0;
+  padding: clamp(46px, 6.5vw, 82px) 0;
 }
 
 .site-header {
@@ -315,15 +315,15 @@ h3 {
 
 h1 {
   max-width: 850px;
-  font-size: clamp(2rem, 7vw, 4.8rem);
+  font-size: clamp(2rem, 6vw, 4.1rem);
 }
 
 h2 {
-  font-size: clamp(1.7rem, 4.8vw, 3rem);
+  font-size: clamp(1.45rem, 4.1vw, 2.45rem);
 }
 
 h3 {
-  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  font-size: clamp(1.08rem, 2.6vw, 1.3rem);
 }
 
 p {
@@ -331,9 +331,21 @@ p {
   color: var(--muted);
 }
 
+.hero-kicker,
 .hero-subtitle {
   color: var(--ink);
   font-size: clamp(1.12rem, 3.8vw, 1.55rem);
+  font-weight: 800;
+}
+
+.hero-kicker {
+  margin-bottom: 8px;
+  color: var(--purple-dark);
+}
+
+.hero-identity {
+  margin-bottom: 12px;
+  color: var(--sage-dark);
   font-weight: 800;
 }
 
@@ -365,10 +377,9 @@ p {
   position: relative;
   overflow: hidden;
   margin: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, #fff, #fdf9ff);
-  box-shadow: var(--shadow);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 18px 42px rgb(74 42 115 / 0.12);
 }
 
 .image-card img {
@@ -377,11 +388,13 @@ p {
 }
 
 .hero-image img {
-  aspect-ratio: 6 / 7;
+  aspect-ratio: 4 / 5;
+  object-position: center center;
 }
 
 .about-image img {
-  aspect-ratio: 8 / 9;
+  aspect-ratio: 4 / 5;
+  object-position: center center;
 }
 
 .trust-strip {
@@ -415,20 +428,32 @@ p {
 
 .section-heading {
   max-width: 760px;
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
 .emotion-list {
   display: grid;
-  gap: 10px;
-  margin: 24px 0;
+  gap: 8px 18px;
+  margin: 22px 0;
 }
 
 .emotion-list p {
+  position: relative;
   margin: 0;
-  border-radius: 16px;
-  background: #fff;
-  padding: 14px 16px;
+  padding-inline-start: 22px;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.emotion-list p::before {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.72em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  content: "";
 }
 
 .cards {
@@ -448,6 +473,26 @@ p {
 
 .card {
   padding: clamp(20px, 4vw, 30px);
+}
+
+.fit-cards .card:nth-child(1) {
+  background: #fffaf5;
+}
+
+.fit-cards .card:nth-child(2) {
+  background: #fdf1fb;
+}
+
+.fit-cards .card:nth-child(3) {
+  background: #f4f8f1;
+}
+
+.fit-note,
+.list-intro,
+.form-note {
+  margin-top: 18px;
+  color: var(--purple-dark);
+  font-weight: 800;
 }
 
 .check-list {
@@ -477,7 +522,7 @@ p {
 
 .service-highlight {
   background:
-    linear-gradient(135deg, rgb(74 42 115 / 0.97), rgb(124 68 171 / 0.94)),
+    linear-gradient(135deg, rgb(105 61 143 / 0.94), rgb(142 86 179 / 0.86)),
     var(--purple-dark);
 }
 
@@ -610,10 +655,36 @@ p {
 
 .contact-list {
   display: grid;
-  gap: 10px;
+  gap: 9px;
   margin: 24px 0 0;
   padding: 0;
   list-style: none;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--purple-dark);
+  padding: 10px 13px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  border-color: var(--gold);
+  background: var(--cream);
+}
+
+.contact-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  fill: var(--sage-dark);
 }
 
 .contact-form {
@@ -797,6 +868,10 @@ textarea {
 }
 
 @media (min-width: 680px) {
+  .emotion-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .trust-grid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }

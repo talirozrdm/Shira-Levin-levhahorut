@@ -4,7 +4,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
 const whatsappMessage =
-  "https://wa.me/972507532044?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A9%D7%99%D7%A8%D7%94%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%9B%D7%A8%D7%98%D7%99%D7%A1%20%D7%A9%D7%9C%20%D7%9C%D7%91%20%D7%94%D7%94%D7%95%D7%A8%D7%95%D7%AA%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA";
+  "https://wa.me/972507532044?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A9%D7%99%D7%A8%D7%94%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%20%D7%9C%D7%91%20%D7%94%D7%94%D7%95%D7%A8%D7%95%D7%AA%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA";
 const instagramUrl = "https://www.instagram.com/shira_goldman_levin/";
 const facebookUrl = "https://www.facebook.com/shira.goldmanlevin?locale=he_IL";
 
@@ -34,19 +34,34 @@ const principles = [
 const supportAreas = [
   {
     title: "גבולות וסמכות הורית",
-    text: "הצבת גבולות, עקביות, מאבקי כוח וחוסר שיתוף פעולה.",
+    text: "איך להציב גבולות ברורים בלי להפוך כל בקשה למאבק.",
   },
   {
     title: "תקשורת וקשר",
-    text: "ריחוק, צעקות, קושי בשיח וחיזוק הקשר בין הורים לילדים.",
+    text: "איך לחזק את הקשר ולנהל שיח גם ברגעים של כעס וריחוק.",
   },
   {
     title: "אתגרי גיל ההתבגרות",
-    text: "עצמאות, מסכים, התנגדויות, סערות רגשיות ותקשורת עם מתבגרים.",
+    text: "תקשורת עם מתבגרים, מסכים, עצמאות, התנגדויות ומאבקי כוח.",
   },
   {
     title: "הורות לילדים על הרצף האוטיסטי",
-    text: "ליווי המותאם לצורכי הילד, ההורים והמערכת המשפחתית.",
+    text: "ליווי שמותאם לצורכי הילד, ההורים והמערכת המשפחתית.",
+  },
+];
+
+const fitCards = [
+  {
+    title: "הורים לילדים בגיל בית הספר",
+    text: "גבולות, שיתוף פעולה, מסכים, מריבות בין אחים ותקשורת בבית.",
+  },
+  {
+    title: "הורים למתבגרים",
+    text: "ריחוק, עצמאות, מאבקי כוח ויצירת תקשורת שמאפשרת גם גבולות וגם קרבה.",
+  },
+  {
+    title: "הורים לילדים על הרצף האוטיסטי",
+    text: "ליווי מותאם לצרכים הייחודיים של הילד, ההורים והמערכת המשפחתית.",
   },
 ];
 
@@ -146,6 +161,19 @@ const defaultPreferences: Preferences = {
   reduceMotion: false,
   readableFont: false,
 };
+
+function ContactIcon() {
+  return (
+    <svg
+      className="contact-icon"
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      focusable="false"
+    >
+      <path d="M12 4.5a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15Zm0 12.2a4.7 4.7 0 1 1 0-9.4 4.7 4.7 0 0 1 0 9.4Z" />
+    </svg>
+  );
+}
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -285,12 +313,13 @@ export default function Home() {
           <div className="container hero-grid">
             <div className="hero-copy">
               <p className="eyebrow">הדרכת הורים אונליין בגישת אדלר</p>
-              <h1 id="hero-title">לב ההורות - הדרכת הורים שמתחילה ביחסים</h1>
+              <h1 id="hero-title">לב ההורות</h1>
+              <p className="hero-kicker">הדרכת הורים שמתחילה ביחסים</p>
+              <p className="hero-identity">שירה לוין, מדריכת הורים ומנחת קבוצות בגישת אדלר</p>
               <p className="hero-subtitle">חיזוק הקשר, הסמכות ההורית והתקשורת בבית</p>
               <p>
-                אני שירה לוין, מדריכת הורים בגישת אדלר. אני מלווה הורים לילדים בגיל
-                בית הספר, למתבגרים ולהורים לילדים על הרצף האוטיסטי, בתהליך אישי
-                ואונליין ליצירת בית בטוח, יציב ומחבר.
+                אני מלווה הורים לילדים בגיל בית הספר, למתבגרים ולהורים לילדים על
+                הרצף האוטיסטי, בתהליך אישי ואונליין ליצירת בית בטוח, יציב ומחבר.
               </p>
               <p className="lead-note">
                 הכול מתחיל ביחסים. כשהקשר בין הורה לילד טוב, שיתוף הפעולה גדל.
@@ -302,7 +331,7 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  בואו נבדוק מה נכון למשפחה שלכם
+                  לתיאום שיחת היכרות בוואטסאפ
                 </a>
                 <a className="text-link" href="#process">
                   איך נראה התהליך?
@@ -312,12 +341,12 @@ export default function Home() {
             </div>
 
             <figure className="image-card hero-image">
-              {/* TODO: replace hero placeholder with approved brand photo, WebP or optimized PNG preferred */}
               <img
-                src="/assets/hero-parent-guidance-placeholder.png"
-                alt="איור עדין וניטרלי המסמן קשר, יציבות והקשבה במשפחה"
-                width="720"
-                height="840"
+                src="/assets/shira-levin-hero.webp"
+                alt="שירה לוין, מדריכת הורים ומנחת קבוצות בגישת אדלר"
+                width="960"
+                height="1200"
+                loading="eager"
                 fetchPriority="high"
               />
             </figure>
@@ -370,20 +399,23 @@ export default function Home() {
         </section>
 
         <section className="section tinted-section" id="fit" aria-labelledby="fit-title">
-          <div className="container split">
-            <div>
+          <div className="container">
+            <div className="section-heading">
               <p className="eyebrow">למי מתאים</p>
               <h2 id="fit-title">למי הליווי מתאים?</h2>
-              <p>
-                הליווי מתאים לאימהות, לאבות ולזוגות הורים. גם כאשר רק הורה אחד
-                משתתף, הוא יכול להתחיל שינוי משמעותי במערכת המשפחתית.
-              </p>
             </div>
-            <ul className="check-list">
-              <li>הורים לילדים בגיל בית הספר</li>
-              <li>הורים למתבגרים</li>
-              <li>הורים לילדים על הרצף האוטיסטי</li>
-            </ul>
+            <div className="cards three-columns fit-cards">
+              {fitCards.map((card) => (
+                <article className="card" key={card.title}>
+                  <h3>{card.title}</h3>
+                  <p>{card.text}</p>
+                </article>
+              ))}
+            </div>
+            <p className="fit-note">
+              הליווי מתאים לאימהות, לאבות ולזוגות הורים. גם כאשר רק הורה אחד
+              משתתף, הוא יכול להתחיל שינוי משמעותי במערכת המשפחתית.
+            </p>
           </div>
         </section>
 
@@ -391,7 +423,7 @@ export default function Home() {
           <div className="container">
             <div className="section-heading">
               <p className="eyebrow">איך אני יכולה לעזור</p>
-              <h2 id="help-title">ארבעה אשכולות ליווי מרכזיים</h2>
+              <h2 id="help-title">במה אני יכולה לעזור?</h2>
             </div>
             <div className="cards two-columns">
               {supportAreas.map((area) => (
@@ -410,11 +442,11 @@ export default function Home() {
               <p className="eyebrow">השירות המרכזי</p>
               <h2 id="services-title">הדרכת הורים אישית אונליין</h2>
               <p>
-                תהליך אישי ומותאם למשפחה, המשלב הבנה מעמיקה של הדינמיקה בבית עם
-                כלים מעשיים ליישום בין המפגשים.
+                תהליך אישי שמחבר בין הבנת הדינמיקה המשפחתית לבין כלים מעשיים
+                שאפשר ליישם בבית.
               </p>
               <ul className="check-list">
-                <li>לרוב 8-12 מפגשים, בהתאם לצורך</li>
+                <li>לרוב 8 עד 12 מפגשים, בהתאם לצורך</li>
                 <li>מפגשים אונליין בזום</li>
                 <li>משימות וכלים בין המפגשים</li>
                 <li>ליווי בוואטסאפ לאורך התהליך</li>
@@ -461,6 +493,7 @@ export default function Home() {
                 בהירות, לנהל שיח גם ברגעים מורכבים ולהרגיש שוב שאתם יודעים להוביל
                 את המשפחה.
               </p>
+              <p className="list-intro">בתהליך נרצה לחזק:</p>
             </div>
             <ul className="check-list">
               <li>יותר ביטחון ומסוגלות הורית</li>
@@ -474,12 +507,11 @@ export default function Home() {
         <section className="section" id="about" aria-labelledby="about-title">
           <div className="container about-grid">
             <figure className="image-card about-image">
-              {/* TODO: replace about placeholder with approved portrait or brand image supplied by client */}
               <img
-                src="/assets/about-shira-placeholder.png"
-                alt="מקום שמור לתמונת תדמית מאושרת של שירה לוין"
-                width="640"
-                height="720"
+                src="/assets/shira-levin-about.webp"
+                alt="שירה לוין, מייסדת לב ההורות ומדריכת הורים"
+                width="900"
+                height="1125"
                 loading="lazy"
               />
             </figure>
@@ -488,12 +520,12 @@ export default function Home() {
               <h2 id="about-title">נעים להכיר, אני שירה לוין</h2>
               <p>
                 אני מדריכת הורים ומנחת קבוצות, ומלווה הורים לילדים ולמתבגרים בדרך
-                ליצירת מערכות יחסים קרובות, בטוחות ומיטיבות יותר בתוך המשפחה.
+                לבניית קשר קרוב, גבולות ברורים ותחושת ביטחון בבית.
               </p>
               <p>
-                הגישה שלי מבוססת על עקרונות אדלריאניים ועל הסתכלות על המשפחה כמערכת
-                שלמה. אני משלבת הקשבה והבנה עמוקה של עולמם הרגשי של הילדים עם
-                גבולות, אחריות הורית וכלים מעשיים שאפשר ליישם בבית.
+                הגישה שלי מבוססת על עקרונות אדלריאניים ועל ההבנה שהורות היא מערכת
+                יחסים. בתהליך אני משלבת הקשבה, אמפתיה והבנת עולמו של הילד עם
+                אחריות הורית וכלים מעשיים.
               </p>
               <p>
                 חשוב לי שהורים שמגיעים אליי ירגישו שהם אינם לבד, שאין כאן שיפוטיות
@@ -562,16 +594,12 @@ export default function Home() {
           <div className="container narrow">
             <h2 id="final-title">כל שינוי גדול מתחיל בצעד קטן</h2>
             <p>
-              שינוי בבית אינו מתחיל בשלמות. הוא מתחיל ברגע שבו בוחרים לעצור, להבין
-              ולפעול אחרת.
-            </p>
-            <p>
-              אם אתם רוצים לחזק את הקשר עם הילדים, להציב גבולות מתוך ביטחון ולהחזיר
-              לבית יותר רוגע ושיתוף פעולה, אני מזמינה אתכם לשיחת היכרות קצרה, שבה
-              נבין מה אתם חווים ונבדוק מה נכון עבור המשפחה שלכם.
+              אם אתם רוצים לחזק את הקשר עם הילדים, להציב גבולות מתוך ביטחון
+              ולהחזיר לבית יותר רוגע ושיתוף פעולה, אני מזמינה אתכם לשיחת היכרות
+              קצרה.
             </p>
             <a className="button" href={whatsappMessage} target="_blank" rel="noopener noreferrer">
-              בואו נבדוק מה נכון למשפחה שלכם
+              לתיאום שיחת היכרות בוואטסאפ
             </a>
           </div>
         </section>
@@ -581,51 +609,50 @@ export default function Home() {
             <div>
               <p className="eyebrow">יצירת קשר</p>
               <h2 id="contact-title">אפשר להתחיל בהודעה קצרה</h2>
-              <ul className="contact-list">
-                <li>
-                  <strong>טלפון:</strong>{" "}
-                  <a href="tel:+972507532044" data-track="click_phone">
-                    050-753-2044
-                  </a>
-                </li>
-                <li>
-                  <strong>דוא״ל:</strong>{" "}
-                  <a href="mailto:shumi25@gmail.com">shumi25@gmail.com</a>
-                </li>
-                <li>
-                  <strong>וואטסאפ:</strong>{" "}
-                  <a
-                    href={whatsappMessage}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-track="click_whatsapp"
-                  >
-                    שליחת הודעה לשירה
-                  </a>
-                </li>
-                <li>
-                  <strong>אינסטגרם:</strong>{" "}
-                  <a
-                    href={instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-track="open_instagram"
-                  >
-                    shira_goldman_levin
-                  </a>
-                </li>
-                <li>
-                  <strong>פייסבוק:</strong>{" "}
-                  <a
-                    href={facebookUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-track="open_facebook"
-                  >
-                    Shira Goldman-Levin
-                  </a>
-                </li>
-              </ul>
+              <p>שלחו לי הודעה ואחזור אליכם לתיאום שיחת היכרות קצרה.</p>
+              <div className="contact-list" aria-label="אפשרויות יצירת קשר">
+                <a
+                  className="contact-link"
+                  href={whatsappMessage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="שלחו לי הודעה בוואטסאפ"
+                  data-track="click_whatsapp"
+                >
+                  <ContactIcon />
+                  <span>שלחו לי הודעה בוואטסאפ</span>
+                </a>
+                <a className="contact-link" href="tel:+972507532044" data-track="click_phone">
+                  <ContactIcon />
+                  <span>050-753-2044</span>
+                </a>
+                <a className="contact-link" href="mailto:shumi25@gmail.com">
+                  <ContactIcon />
+                  <span>shumi25@gmail.com</span>
+                </a>
+                <a
+                  className="contact-link"
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="אינסטגרם של שירה לוין"
+                  data-track="open_instagram"
+                >
+                  <ContactIcon />
+                  <span>@shira_goldman_levin</span>
+                </a>
+                <a
+                  className="contact-link"
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="פייסבוק של שירה גולדמן לוין"
+                  data-track="open_facebook"
+                >
+                  <ContactIcon />
+                  <span>שירה גולדמן לוין</span>
+                </a>
+              </div>
             </div>
 
             <form
@@ -635,7 +662,7 @@ export default function Home() {
               noValidate
               onSubmit={submitContact}
             >
-              {/* TODO: connect this form to a real form service or secure backend before publishing */}
+              {/* TODO: connect form to approved backend or form service */}
               <div className="field">
                 <label htmlFor="name">שם מלא</label>
                 <input id="name" name="name" type="text" autoComplete="name" required />
@@ -652,7 +679,7 @@ export default function Home() {
                 />
               </div>
               <div className="field">
-                <label htmlFor="childAge">גיל הילד/ה או הילדים</label>
+                <label htmlFor="childAge">גיל הילד, הילדה או הילדים</label>
                 <input id="childAge" name="childAge" type="text" required />
               </div>
               <div className="field">
@@ -662,8 +689,8 @@ export default function Home() {
               <label className="checkbox-field" htmlFor="privacy">
                 <input id="privacy" name="privacy" type="checkbox" required />
                 <span>
-                  קראתי את <a href="#privacy-policy">מדיניות הפרטיות</a> ואני מאשר/ת
-                  יצירת קשר.
+                  קראתי את <a href="/privacy.html">מדיניות הפרטיות</a> ואני מאשר/ת
+                  את שליחת הפרטים לצורך יצירת קשר.
                 </span>
               </label>
               <button className="button" type="submit" data-track="submit_contact_form">
@@ -676,74 +703,11 @@ export default function Home() {
               >
                 {status}
               </p>
+              <p className="form-note">אחזור אליכם בהקדם לתיאום שיחת היכרות קצרה.</p>
             </form>
           </div>
         </section>
 
-        <section className="section legal-section" id="accessibility" aria-labelledby="accessibility-title">
-          <div className="container narrow">
-            {/* TODO: review accessibility statement wording before publishing */}
-            <h2 id="accessibility-title">הצהרת נגישות</h2>
-            <p>
-              לב ההורות מחויבת לאפשר שימוש נגיש ונוח ככל האפשר באתר, מתוך כבוד
-              להורים ולמבקרים המשתמשים באמצעים שונים לגלישה.
-            </p>
-            <h3>התאמות שבוצעו בפועל</h3>
-            <p>
-              העמוד נבנה ב-HTML סמנטי, כולל כותרות מסודרות, קישור דילוג לתוכן
-              הראשי, מצבי פוקוס ברורים, תוויות גלויות לשדות, טקסט חלופי לתמונות,
-              ניווט מקלדת, תמיכה בהעדפת הפחתת תנועה ותפריט נגישות בסיסי.
-            </p>
-            <h3>ניווט ושימוש</h3>
-            <p>
-              ניתן לנווט באתר באמצעות מקלדת, לפתוח את תפריט הניווט, לפתוח ולסגור
-              שאלות נפוצות, לעבור בין שדות הטופס ולהפעיל את תפריט הנגישות.
-            </p>
-            <h3>דיווח על קושי</h3>
-            <p>
-              אם נתקלתם בקושי בשימוש באתר, ניתן לפנות לשירה לוין בטלפון
-              050-753-2044 או בדוא״ל shumi25@gmail.com.
-            </p>
-            <h3>מגבלות קיימות</h3>
-            <p>
-              בשלב זה תמונות התדמית הן מצייני מקום זמניים. לאחר קבלת חומרי המותג
-              הסופיים יש לבדוק שוב את הטקסט החלופי, משקל הקבצים והתצוגה.
-            </p>
-            <p className="updated">תאריך עדכון: 16 ביולי 2026</p>
-          </div>
-        </section>
-
-        <section className="section legal-section" id="privacy-policy" aria-labelledby="privacy-title">
-          <div className="container narrow">
-            {/* TODO: legal review of privacy policy before publishing */}
-            <h2 id="privacy-title">מדיניות פרטיות</h2>
-            <p>
-              הטופס באתר מיועד לאפשר יצירת קשר חוזר עם פונים ומתן מידע על שירותי
-              הדרכת ההורים של לב ההורות.
-            </p>
-            <h3>איזה מידע נאסף</h3>
-            <p>
-              בטופס נאספים שם, טלפון, גיל הילד/ה או הילדים והודעה חופשית, אם נכתבה.
-            </p>
-            <h3>מטרת איסוף המידע</h3>
-            <p>
-              המידע מיועד ליצירת קשר עם הפונה, לתיאום שיחת היכרות ולמתן מידע על
-              השירותים.
-            </p>
-            <h3>עדכון או מחיקה</h3>
-            <p>
-              ניתן לבקש עדכון או מחיקה של פרטים באמצעות פנייה לכתובת
-              shumi25@gmail.com או לטלפון 050-753-2044.
-            </p>
-            <h3>עוגיות וכלי מדידה</h3>
-            <p>
-              בשלב זה לא נטענים באתר Google Analytics, Meta Pixel או כלי מדידה
-              חיצוניים. אם יופעלו בעתיד, יש לעדכן מדיניות זו ולקבל את האישורים
-              הנדרשים לפני הטמעה.
-            </p>
-            <p className="updated">תאריך עדכון: 16 ביולי 2026</p>
-          </div>
-        </section>
       </main>
 
       <div className="accessibility-widget">
@@ -813,7 +777,7 @@ export default function Home() {
           <button type="button" onClick={() => setPreferences(defaultPreferences)}>
             איפוס הגדרות
           </button>
-          <a href="#accessibility" onClick={() => setAccessibilityOpen(false)}>
+          <a href="/accessibility.html" onClick={() => setAccessibilityOpen(false)}>
             הצהרת הנגישות
           </a>
         </div>
@@ -832,8 +796,8 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="container footer-links">
-          <a href="#accessibility">הצהרת נגישות</a>
-          <a href="#privacy-policy">מדיניות פרטיות</a>
+          <a href="/accessibility.html">הצהרת נגישות</a>
+          <a href="/privacy.html">מדיניות פרטיות</a>
         </div>
         <div className="creator-footer">
           <p>נבנה ועוצב על ידי טלי רוזנברג | אסטרטגיה וצמיחה עסקית</p>
