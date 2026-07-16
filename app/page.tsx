@@ -1,7 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 
 const whatsappMessage =
   "https://wa.me/972507532044?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A9%D7%99%D7%A8%D7%94%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%9B%D7%A8%D7%98%D7%99%D7%A1%20%D7%A9%D7%9C%20%D7%9C%D7%91%20%D7%94%D7%94%D7%95%D7%A8%D7%95%D7%AA%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA";
@@ -219,12 +219,13 @@ export default function Home() {
         <div className="container header-inner">
           <a className="brand" href="#top" aria-label="לב ההורות, מעבר לראש העמוד">
             {/* TODO: replace with final high-resolution transparent logo supplied by client */}
-            <Image
+            <img
               src="/assets/lev-hahorut-logo-placeholder.png"
               alt="לב ההורות - הדרכת הורים עם שירה לוין"
               width="72"
               height="72"
               className="brand-logo"
+              decoding="async"
             />
             <span>
               <strong>לב ההורות</strong>
@@ -309,12 +310,12 @@ export default function Home() {
 
             <figure className="image-card hero-image">
               {/* TODO: replace hero placeholder with approved brand photo, WebP or optimized PNG preferred */}
-              <Image
+              <img
                 src="/assets/hero-parent-guidance-placeholder.png"
                 alt="איור עדין וניטרלי המסמן קשר, יציבות והקשבה במשפחה"
                 width="720"
                 height="840"
-                priority
+                fetchPriority="high"
               />
             </figure>
           </div>
@@ -471,7 +472,7 @@ export default function Home() {
           <div className="container about-grid">
             <figure className="image-card about-image">
               {/* TODO: replace about placeholder with approved portrait or brand image supplied by client */}
-              <Image
+              <img
                 src="/assets/about-shira-placeholder.png"
                 alt="מקום שמור לתמונת תדמית מאושרת של שירה לוין"
                 width="640"
