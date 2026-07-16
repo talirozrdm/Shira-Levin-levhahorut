@@ -275,6 +275,7 @@ textarea {
   font-weight: 800;
   line-height: 1.25;
   text-align: center;
+  text-wrap: balance;
   text-decoration: none;
   transition:
     transform 280ms ease,
@@ -375,12 +376,14 @@ p {
 .hero-kicker {
   margin-bottom: 8px;
   color: var(--purple-dark);
+  text-wrap: balance;
 }
 
 .hero-identity {
   margin-bottom: 12px;
   color: var(--sage-dark);
   font-weight: 800;
+  text-wrap: balance;
 }
 
 .lead-note,
@@ -391,6 +394,7 @@ p {
   font-size: var(--body-copy-size);
   font-weight: 700;
   line-height: var(--body-copy-line-height);
+  text-wrap: balance;
 }
 
 .hero-actions {
@@ -778,6 +782,17 @@ p {
 .final-cta h2,
 .final-cta p {
   color: #fff;
+  text-wrap: balance;
+}
+
+.final-cta p {
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.cta-break {
+  display: block;
+  text-wrap: balance;
 }
 
 .final-cta .button {
@@ -818,6 +833,7 @@ p {
 .contact-actions > p {
   max-width: 620px;
   margin-inline: auto;
+  text-wrap: balance;
 }
 
 .contact-group {

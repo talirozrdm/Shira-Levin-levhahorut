@@ -654,8 +654,8 @@ export default function Home() {
             <h2 id="final-title">כל שינוי גדול מתחיל בצעד קטן</h2>
             <p>
               אם אתם רוצים לחזק את הקשר עם הילדים, להציב גבולות מתוך ביטחון
-              ולהכניס לבית יותר רוגע ושיתוף פעולה, אני מזמינה אתכם להתחיל בשיחת היכרות
-              קצרה.
+              ולהכניס לבית יותר רוגע ושיתוף פעולה,{" "}
+              <span className="cta-break">אני מזמינה אתכם להתחיל בשיחת היכרות קצרה.</span>
             </p>
             <a className="button" href={whatsappMessage} target="_blank" rel="noopener noreferrer">
               לתיאום שיחת היכרות בוואטסאפ

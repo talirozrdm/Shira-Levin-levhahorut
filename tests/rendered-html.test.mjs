@@ -75,6 +75,8 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.match(html, /wa\.me\/972507532044/);
   assert.match(html, /לתיאום שיחת היכרות בוואטסאפ/);
   assert.equal((html.match(primaryCtaPattern) ?? []).length, 2);
+  assert.match(html, /class="cta-break">אני מזמינה אתכם להתחיל בשיחת היכרות קצרה\.<\/span>/);
+  assert.doesNotMatch(html, /<br\s*\/?>/i);
   assert.match(html, /שלחו לי הודעה בוואטסאפ/);
   assert.match(html, /@shira_goldman_levin/);
   assert.match(html, /class="emotion-column"/);
@@ -106,6 +108,8 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.match(css, /\.hero-image\s*\{[\s\S]*width:\s*min\(100%, 340px\)/);
   assert.match(css, /0 0 24px rgb\(185 129 209 \/ 0\.18\)/);
   assert.match(css, /\.nowrap\s*\{[\s\S]*white-space:\s*nowrap/);
+  assert.match(css, /\.cta-break\s*\{[\s\S]*display:\s*block/);
+  assert.match(css, /text-wrap:\s*balance/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(privacy, /נכון למועד פרסום האתר לא נעשה שימוש בכלי מדידה או מעקב של צד שלישי/);
   assert.match(privacy, /<span class="nowrap">shumi25@gmail\.com<\/span>/);
