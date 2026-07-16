@@ -1,0 +1,98 @@
+import assert from "node:assert/strict";
+import { access, readFile } from "node:fs/promises";
+import test from "node:test";
+
+const starterPattern = new RegExp(
+  ["codex" + "-preview", "Skeleton" + "Preview", "react-loading" + "-skeleton"].join("|"),
+);
+const longDashPattern = /[\u2014\u2013\u2212]/;
+const forbiddenCopyPattern = new RegExp(
+  [
+    ["טי", "פים"],
+    ["פתרונות", " קסם"],
+    ["שיטות", " קסם"],
+    ["שיטות", " מהירות"],
+    ["פתרונות", " מהירים"],
+    ["ילדים", " בעייתיים"],
+  ]
+    .map((parts) => parts.join(""))
+    .join("|"),
+);
+
+async function render() {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  return worker.fetch(
+    new Request("http://localhost/", {
+      headers: { accept: "text/html" },
+    }),
+    {
+      ASSETS: {
+        fetch: async () => new Response("Not found", { status: 404 }),
+      },
+    },
+    {
+      waitUntil() {},
+      passThroughOnException() {},
+    },
+  );
+}
+
+test("renders the Hebrew RTL landing page with SEO essentials", async () => {
+  const response = await render();
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+
+  const html = await response.text();
+  assert.match(html, /<html lang="he" dir="rtl">/);
+  assert.match(html, /<title>שירה לוין \| לב ההורות - הדרכת הורים אונליין למתבגרים ולמשפחות<\/title>/);
+  assert.match(html, /<meta name="description"/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/example\.com\/lev-hahorut"/);
+  assert.match(html, /property="og:image" content="https:\/\/example\.com\/assets\/lev-hahorut-og-placeholder\.jpg"/);
+  assert.match(html, /name="twitter:card" content="summary_large_image"/);
+  assert.match(html, /type="application\/ld\+json"/);
+  assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
+  assert.match(html, /לב ההורות - הדרכת הורים שמתחילה ביחסים/);
+});
+
+test("includes conversion, accessibility, and privacy affordances", async () => {
+  const html = await (await render()).text();
+
+  assert.match(html, /דילוג לתוכן הראשי/);
+  assert.match(html, /aria-controls="site-nav"/);
+  assert.match(html, /aria-controls="faq-panel-0"/);
+  assert.match(html, /aria-expanded="true"/);
+  assert.match(html, /aria-label="פתיחת תפריט נגישות"/);
+  assert.match(html, /הצהרת נגישות/);
+  assert.match(html, /מדיניות פרטיות/);
+  assert.match(html, /aria-live="polite"/);
+  assert.match(html, /050-753-2044/);
+  assert.match(html, /wa\.me\/972507532044/);
+  assert.match(html, /לתיאום שיחת היכרות בוואטסאפ/);
+  assert.match(html, /<label for="name">שם מלא<\/label>/);
+  assert.match(html, /<label for="phone">טלפון<\/label>/);
+  assert.match(html, /<label for="childAge">גיל הילד\/ה או הילדים<\/label>/);
+});
+
+test("keeps starter code and disallowed copy out of the finished page", async () => {
+  const [page, layout, css, packageJson] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../package.json", import.meta.url), "utf8"),
+  ]);
+  const combined = `${page}\n${layout}\n${css}\n${packageJson}`;
+
+  assert.doesNotMatch(combined, starterPattern);
+  assert.doesNotMatch(combined, longDashPattern);
+  assert.doesNotMatch(combined, forbiddenCopyPattern);
+  assert.match(page, /TODO: replace with final high-resolution transparent logo/);
+  assert.match(page, /TODO: connect this form to a real form service/);
+  assert.match(css, /prefers-reduced-motion:\s*reduce/);
+
+  await assert.rejects(
+    access(new URL("../app/_sites-preview/" + "Skeleton" + "Preview.tsx", import.meta.url)),
+  );
+});
