@@ -806,7 +806,7 @@ export default function Home() {
             href="https://wa.me/message/R774GIXF2DOGP1"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="לבניית כרטיס שיווק דיגיטלי"
+            aria-label="יצירת קשר עם טלי רוזנברג לבניית כרטיס שיווק דיגיטלי"
           >
             לבניית כרטיס שיווק דיגיטלי
           </a>
