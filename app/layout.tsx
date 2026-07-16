@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     images: ["/assets/lev-hahorut-og-placeholder.jpg"],
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/assets/lev-hahorut-logo-512.png",
+    shortcut: "/assets/lev-hahorut-logo-512.png",
   },
 };
 

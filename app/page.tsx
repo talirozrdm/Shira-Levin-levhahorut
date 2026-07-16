@@ -5,12 +5,14 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 
 const whatsappMessage =
   "https://wa.me/972507532044?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A9%D7%99%D7%A8%D7%94%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%9B%D7%A8%D7%98%D7%99%D7%A1%20%D7%A9%D7%9C%20%D7%9C%D7%91%20%D7%94%D7%94%D7%95%D7%A8%D7%95%D7%AA%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA";
+const instagramUrl = "https://www.instagram.com/shira_goldman_levin/";
+const facebookUrl = "https://www.facebook.com/shira.goldmanlevin?locale=he_IL";
 
 const trustItems = [
   "5 שנות ניסיון",
   "הכשרה במכון אדלר",
   "התמחות בהדרכת הורים למתבגרים",
-  "התמחות בהדרכת הורים לילדים על הרצף האוטיסטי",
+  "התמחות בליווי הורים לילדים על הרצף האוטיסטי",
   "ליווי בזום בכל הארץ",
 ];
 
@@ -108,6 +110,7 @@ const jsonLd = {
       },
       email: "shumi25@gmail.com",
       telephone: "+972507532044",
+      sameAs: [instagramUrl, facebookUrl],
     },
     {
       "@type": "ProfessionalService",
@@ -121,6 +124,7 @@ const jsonLd = {
         serviceUrl: "https://wa.me/972507532044",
         availableLanguage: "he",
       },
+      sameAs: [instagramUrl, facebookUrl],
     },
   ],
 };
@@ -218,12 +222,11 @@ export default function Home() {
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#top" aria-label="לב ההורות, מעבר לראש העמוד">
-            {/* TODO: replace with final high-resolution transparent logo supplied by client */}
             <img
-              src="/assets/lev-hahorut-logo-placeholder.png"
+              src="/assets/lev-hahorut-logo-512.png"
               alt="לב ההורות - הדרכת הורים עם שירה לוין"
-              width="72"
-              height="72"
+              width="512"
+              height="512"
               className="brand-logo"
               decoding="async"
             />
@@ -500,7 +503,7 @@ export default function Home() {
               <ul className="check-list">
                 <li>הדרכת הורים והנחיית קבוצות במכון אדלר</li>
                 <li>התמחות בהדרכת הורים למתבגרים</li>
-                <li>התמחות בהדרכת הורים לילדים על הרצף האוטיסטי</li>
+                <li>התמחות בליווי הורים לילדים על הרצף האוטיסטי</li>
                 <li>5 שנות ניסיון בליווי הורים ומשפחות</li>
               </ul>
             </div>
@@ -586,7 +589,7 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <strong>אימייל:</strong>{" "}
+                  <strong>דוא״ל:</strong>{" "}
                   <a href="mailto:shumi25@gmail.com">shumi25@gmail.com</a>
                 </li>
                 <li>
@@ -603,7 +606,7 @@ export default function Home() {
                 <li>
                   <strong>אינסטגרם:</strong>{" "}
                   <a
-                    href="https://www.instagram.com/shira_goldman_levin/"
+                    href={instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     data-track="open_instagram"
@@ -612,7 +615,15 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <strong>פייסבוק:</strong> Shira Goldman-Levin
+                  <strong>פייסבוק:</strong>{" "}
+                  <a
+                    href={facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track="open_facebook"
+                  >
+                    Shira Goldman-Levin
+                  </a>
                 </li>
               </ul>
             </div>
@@ -680,8 +691,8 @@ export default function Home() {
             <h3>התאמות שבוצעו בפועל</h3>
             <p>
               העמוד נבנה ב-HTML סמנטי, כולל כותרות מסודרות, קישור דילוג לתוכן
-              הראשי, מצבי פוקוס ברורים, labels גלויים לשדות, alt לתמונות, ניווט
-              מקלדת, תמיכה בהעדפת הפחתת תנועה ותפריט נגישות בסיסי.
+              הראשי, מצבי פוקוס ברורים, תוויות גלויות לשדות, טקסט חלופי לתמונות,
+              ניווט מקלדת, תמיכה בהעדפת הפחתת תנועה ותפריט נגישות בסיסי.
             </p>
             <h3>ניווט ושימוש</h3>
             <p>
@@ -691,12 +702,12 @@ export default function Home() {
             <h3>דיווח על קושי</h3>
             <p>
               אם נתקלתם בקושי בשימוש באתר, ניתן לפנות לשירה לוין בטלפון
-              050-753-2044 או במייל shumi25@gmail.com.
+              050-753-2044 או בדוא״ל shumi25@gmail.com.
             </p>
             <h3>מגבלות קיימות</h3>
             <p>
-              בשלב זה תמונות התדמית והלוגו הם placeholders זמניים. לאחר קבלת חומרי
-              המותג הסופיים יש לבדוק שוב את הטקסט החלופי, משקל הקבצים והתצוגה.
+              בשלב זה תמונות התדמית הן מצייני מקום זמניים. לאחר קבלת חומרי המותג
+              הסופיים יש לבדוק שוב את הטקסט החלופי, משקל הקבצים והתצוגה.
             </p>
             <p className="updated">תאריך עדכון: 16 ביולי 2026</p>
           </div>
@@ -707,8 +718,8 @@ export default function Home() {
             {/* TODO: legal review of privacy policy before publishing */}
             <h2 id="privacy-title">מדיניות פרטיות</h2>
             <p>
-              הטופס באתר מיועד לאפשר חזרה לפונים ומתן מידע על שירותי הדרכת ההורים
-              של לב ההורות.
+              הטופס באתר מיועד לאפשר יצירת קשר חוזר עם פונים ומתן מידע על שירותי
+              הדרכת ההורים של לב ההורות.
             </p>
             <h3>איזה מידע נאסף</h3>
             <p>

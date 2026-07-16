@@ -88,7 +88,7 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.doesNotMatch(combined, starterPattern);
   assert.doesNotMatch(combined, longDashPattern);
   assert.doesNotMatch(combined, forbiddenCopyPattern);
-  assert.match(page, /TODO: replace with final high-resolution transparent logo/);
+  assert.match(page, /lev-hahorut-logo-512\.png/);
   assert.match(page, /TODO: connect this form to a real form service/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
 
