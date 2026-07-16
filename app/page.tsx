@@ -430,12 +430,16 @@ export default function Home() {
         <section className="section soft-section need-section reveal-item" aria-labelledby="need-title">
           <div className="container narrow">
             <h2 id="need-title">אולי גם אצלכם בבית...</h2>
-            <div className="emotion-list">
-              <p>כל בקשה הופכת לוויכוח.</p>
-              <p>קשה להציב גבולות בלי להגיע למאבק.</p>
-              <p>המתבגר מתרחק וקשה להגיע אליו.</p>
-              <p>אתם רוצים להיות מכילים, אבל מרגישים שהסמכות ההורית נשחקה.</p>
-              <p>בסוף היום נשארים עם תסכול, אשמה ותחושה שכבר ניסיתם הכול.</p>
+            <div className="emotion-list" role="list">
+              <div className="emotion-column">
+                <p role="listitem">כל בקשה הופכת לוויכוח.</p>
+                <p role="listitem">קשה להציב גבולות בלי להגיע למאבק.</p>
+                <p role="listitem">אתם רוצים להיות מכילים, אבל מרגישים שהסמכות ההורית נשחקה.</p>
+              </div>
+              <div className="emotion-column">
+                <p role="listitem">המתבגר מתרחק וקשה להגיע אליו.</p>
+                <p role="listitem">בסוף היום נשארים עם תסכול, אשמה ותחושה שכבר ניסיתם הכול.</p>
+              </div>
             </div>
             <p className="section-summary">
               הקושי אינו אומר שנכשלתם כהורים. הוא מסמן שאולי הגיע הזמן למצוא דרך

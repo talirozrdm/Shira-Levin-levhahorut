@@ -77,6 +77,7 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.equal((html.match(primaryCtaPattern) ?? []).length, 2);
   assert.match(html, /שלחו לי הודעה בוואטסאפ/);
   assert.match(html, /@shira_goldman_levin/);
+  assert.match(html, /class="emotion-column"/);
   assert.doesNotMatch(html, /<form\b/);
   assert.doesNotMatch(html, /שליחת פרטים/);
   assert.doesNotMatch(html, /הטופס עדיין|טופס יצירת קשר/);
@@ -102,9 +103,15 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.match(page, /lev-hahorut-logo-512\.png/);
   assert.doesNotMatch(page, /submitContact|FormEvent|contact-form|aria-invalid|field-error/);
   assert.match(css, /--body-copy-size:\s*calc\(18px \* var\(--user-font-scale\)\)/);
+  assert.match(css, /\.hero-image\s*\{[\s\S]*width:\s*min\(100%, 340px\)/);
+  assert.match(css, /0 0 24px rgb\(185 129 209 \/ 0\.18\)/);
+  assert.match(css, /\.nowrap\s*\{[\s\S]*white-space:\s*nowrap/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(privacy, /נכון למועד פרסום האתר לא נעשה שימוש בכלי מדידה או מעקב של צד שלישי/);
+  assert.match(privacy, /<span class="nowrap">shumi25@gmail\.com<\/span>/);
+  assert.match(privacy, /<span class="nowrap" dir="ltr">050-753-2044<\/span>/);
   assert.match(accessibility, /נעשה מאמץ להנגיש את האתר בהתאם להנחיות הנגישות המקובלות/);
+  assert.match(accessibility, /<span class="nowrap" dir="ltr">050-753-2044<\/span>/);
 
   await assert.rejects(
     access(new URL("../app/_sites-preview/" + "Skeleton" + "Preview.tsx", import.meta.url)),

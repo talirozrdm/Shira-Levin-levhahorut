@@ -179,22 +179,28 @@ textarea {
   justify-content: center;
   border-radius: 50%;
   background: #fff;
-  padding: 4px;
-  box-shadow: 0 6px 16px rgb(74 42 115 / 0.12);
+  padding: 6px;
+  box-shadow:
+    0 8px 20px rgb(74 42 115 / 0.15),
+    0 0 0 4px rgb(255 255 255 / 0.82),
+    0 0 24px rgb(185 129 209 / 0.18);
   transition:
     transform 280ms ease,
     box-shadow 280ms ease;
 }
 
 .site-logo img {
-  height: clamp(48px, 5vw, 76px);
+  height: clamp(50px, 5.2vw, 80px);
   width: auto;
   object-fit: contain;
 }
 
 .brand:hover .site-logo {
   transform: translateY(-1px);
-  box-shadow: 0 9px 20px rgb(74 42 115 / 0.15);
+  box-shadow:
+    0 10px 24px rgb(74 42 115 / 0.18),
+    0 0 0 4px rgb(255 255 255 / 0.9),
+    0 0 28px rgb(185 129 209 / 0.22);
 }
 
 .brand-logo {
@@ -433,7 +439,7 @@ p {
 
 .hero-image {
   justify-self: center;
-  width: min(100%, 370px);
+  width: min(100%, 340px);
   max-width: 100%;
 }
 
@@ -515,11 +521,17 @@ p {
 
 .emotion-list {
   display: grid;
-  gap: 8px 18px;
+  gap: 12px 22px;
   margin: 16px 0 12px;
 }
 
-.emotion-list p {
+.emotion-column {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.emotion-column p {
   position: relative;
   margin: 0;
   padding-inline-start: 22px;
@@ -527,7 +539,7 @@ p {
   font-weight: var(--body-copy-weight);
 }
 
-.emotion-list p::before {
+.emotion-column p::before {
   position: absolute;
   inset-inline-start: 0;
   top: 0.72em;
@@ -900,12 +912,18 @@ p {
 }
 
 .contact-link small {
-  overflow: hidden;
+  overflow: visible;
   color: var(--muted);
   font-size: var(--body-copy-size);
   font-weight: var(--body-copy-weight);
   line-height: var(--body-copy-line-height);
-  text-overflow: ellipsis;
+  text-overflow: clip;
+}
+
+.contact-link small[dir="ltr"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
 }
 
 .contact-icon {
@@ -926,6 +944,14 @@ p {
 .updated {
   color: var(--purple-dark);
   font-weight: 800;
+}
+
+.nowrap {
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .accessibility-widget {
@@ -1099,6 +1125,7 @@ p {
 @media (min-width: 680px) {
   .emotion-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
   }
 
   .trust-grid {
@@ -1151,7 +1178,7 @@ p {
   }
 
   .hero-image {
-    width: min(410px, 32vw);
+    width: min(374px, 29vw);
   }
 
   .social-grid {
