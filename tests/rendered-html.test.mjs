@@ -80,6 +80,10 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.match(html, /שלחו לי הודעה בוואטסאפ/);
   assert.match(html, /@shira_goldman_levin/);
   assert.match(html, /class="emotion-list"/);
+  assert.match(html, /class="editorial-word hero-word" aria-hidden="true">RELATIONSHIPS<\/span>/);
+  assert.match(html, /class="editorial-word need-word" aria-hidden="true">HOME<\/span>/);
+  assert.match(html, /class="editorial-word approach-word" aria-hidden="true">יחסים<\/span>/);
+  assert.match(html, /class="editorial-word service-word" aria-hidden="true">GUIDANCE<\/span>/);
   assert.match(html, /class="signature-block"/);
   assert.doesNotMatch(html, /signature-mark/);
   assert.match(html, /<figcaption><strong>שירה לוין<\/strong><span>מדריכת הורים ומנחת קבוצות בגישת אדלר<\/span><\/figcaption>/);
@@ -90,6 +94,7 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.doesNotMatch(html, /הטופס עדיין|טופס יצירת קשר/);
   assert.doesNotMatch(html, /שירה תחזור|שירה מלווה|שירה מתמחה/);
   assert.doesNotMatch(html, /הגישה המקצועית|השירות המרכזי|הדרך בפועל|מה נרצה לחזק|קצת עליי/);
+  assert.doesNotMatch(html, />PARENTING</);
 });
 
 test("keeps starter code and disallowed copy out of the finished page", async () => {
@@ -116,8 +121,14 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.doesNotMatch(css, /\.signature-mark\s*\{/);
   assert.match(css, /\.sticky-whatsapp\.is-visible\s*\{/);
   assert.match(css, /@keyframes shape-drift/);
-  assert.match(css, /content:\s*"RELATIONSHIPS"/);
+  assert.match(css, /--display-font:\s*"Frank Ruhl Libre"/);
+  assert.match(css, /\.editorial-word\s*\{/);
+  assert.match(css, /\.approach-section::before\s*\{[\s\S]*content:\s*none/);
+  assert.doesNotMatch(css, /content:\s*"PARENTING"/);
   assert.match(css, /--aubergine:\s*#26102f/);
+  assert.match(css, /--muted:\s*#73616b/);
+  assert.match(css, /\.emotion-list\s*\{[\s\S]*counter-reset:\s*home-moments/);
+  assert.match(css, /\.emotion-list p\s*\{[\s\S]*background:\s*transparent/);
   assert.match(css, /\.principles-list\s*\{[\s\S]*border-block:\s*0/);
   assert.match(css, /\.trust-grid\s*\{[\s\S]*display:\s*flex/);
   assert.match(css, /\.nowrap\s*\{[\s\S]*white-space:\s*nowrap/);
