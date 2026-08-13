@@ -80,10 +80,13 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.match(html, /שלחו לי הודעה בוואטסאפ/);
   assert.match(html, /@shira_goldman_levin/);
   assert.match(html, /class="emotion-list"/);
-  assert.match(html, /class="editorial-word hero-word" aria-hidden="true">RELATIONSHIPS<\/span>/);
-  assert.match(html, /class="editorial-word need-word" aria-hidden="true">HOME<\/span>/);
+  assert.match(html, /class="editorial-word hero-word" aria-hidden="true">יחסים<\/span>/);
+  assert.match(html, /class="editorial-word need-word" aria-hidden="true">בית<\/span>/);
   assert.match(html, /class="editorial-word approach-word" aria-hidden="true">יחסים<\/span>/);
-  assert.match(html, /class="editorial-word service-word" aria-hidden="true">GUIDANCE<\/span>/);
+  assert.match(html, /class="editorial-word process-word" aria-hidden="true">דרך<\/span>/);
+  assert.match(html, /class="editorial-grid fit-grid"/);
+  assert.match(html, /class="editorial-grid help-grid"/);
+  assert.doesNotMatch(html, /class="cards three-columns fit-cards"|class="cards two-columns"/);
   assert.match(html, /class="signature-block"/);
   assert.doesNotMatch(html, /signature-mark/);
   assert.match(html, /<figcaption><strong>שירה לוין<\/strong><span>מדריכת הורים ומנחת קבוצות בגישת אדלר<\/span><\/figcaption>/);
@@ -94,7 +97,7 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.doesNotMatch(html, /הטופס עדיין|טופס יצירת קשר/);
   assert.doesNotMatch(html, /שירה תחזור|שירה מלווה|שירה מתמחה/);
   assert.doesNotMatch(html, /הגישה המקצועית|השירות המרכזי|הדרך בפועל|מה נרצה לחזק|קצת עליי/);
-  assert.doesNotMatch(html, />PARENTING</);
+  assert.doesNotMatch(html, />PARENTING|>RELATIONSHIPS|>HOME|>GUIDANCE|>PROCESS|>SUPPORT|>CONTACT</);
 });
 
 test("keeps starter code and disallowed copy out of the finished page", async () => {
@@ -124,21 +127,30 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.match(css, /--display-font:\s*"Frank Ruhl Libre"/);
   assert.match(css, /\.editorial-word\s*\{/);
   assert.match(css, /\.approach-section::before\s*\{[\s\S]*content:\s*none/);
-  assert.doesNotMatch(css, /content:\s*"PARENTING"/);
-  assert.match(css, /--aubergine:\s*#26102f/);
-  assert.match(css, /--muted:\s*#73616b/);
+  assert.doesNotMatch(css, /content:\s*"(PARENTING|SUPPORT|PROCESS|FAQ|CONTACT|HOME|GUIDANCE|RELATIONSHIPS)"/);
+  assert.doesNotMatch(css, /text-transform:\s*uppercase/);
+  assert.match(css, /--aubergine:\s*#2f1439/);
+  assert.match(css, /--muted:\s*#796874/);
   assert.match(css, /\.emotion-list\s*\{[\s\S]*counter-reset:\s*home-moments/);
   assert.match(css, /\.emotion-list p\s*\{[\s\S]*background:\s*transparent/);
   assert.match(css, /\.principles-list\s*\{[\s\S]*border-block:\s*0/);
+  assert.match(css, /h1,\s*\nh2\s*\{[\s\S]*font-family:\s*var\(--display-font\)/);
+  assert.match(css, /h3\s*\{[\s\S]*font-family:\s*var\(--body-font\)/);
+  assert.match(css, /\.text-link::after\s*\{[\s\S]*content:\s*"←"/);
+  assert.match(css, /\.editorial-grid\s*\{/);
+  assert.match(css, /\.fit-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.help-grid,\s*\n\s*\.clarity-list\s*\{[\s\S]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /#process\s*\{[\s\S]*var\(--ivory\)/);
+  assert.match(css, /\.clarity-list\s*\{[\s\S]*list-style:\s*none/);
   assert.match(css, /\.trust-grid\s*\{[\s\S]*display:\s*flex/);
   assert.match(css, /\.nowrap\s*\{[\s\S]*white-space:\s*nowrap/);
   assert.match(css, /\.cta-break\s*\{[\s\S]*display:\s*block/);
   assert.match(css, /text-wrap:\s*balance/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.match(privacy, /נכון למועד עדכון מדיניות זו, האתר אינו עושה שימוש בכלי מדידה או מעקב חיצוניים לצורכי פרסום/);
+  assert.match(privacy, /נכון למועד פרסום האתר לא נעשה שימוש בכלי מדידה או מעקב של צד שלישי/);
   assert.match(privacy, /<span class="nowrap">shumi25@gmail\.com<\/span>/);
   assert.match(privacy, /<span class="nowrap" dir="ltr">050-753-2044<\/span>/);
-  assert.match(accessibility, /נעשה מאמץ להנגיש את האתר ולאפשר חוויית שימוש נוחה ככל האפשר/);
+  assert.match(accessibility, /נעשה מאמץ להנגיש את האתר בהתאם להנחיות הנגישות המקובלות/);
   assert.match(accessibility, /<span class="nowrap" dir="ltr">050-753-2044<\/span>/);
 
   await assert.rejects(
