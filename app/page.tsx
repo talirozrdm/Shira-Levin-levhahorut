@@ -404,7 +404,6 @@ export default function Home() {
                 הרצף האוטיסטי, בדרך לחיזוק הקשר, הסמכות ההורית והתקשורת בבית.
               </p>
               <div className="signature-block" aria-label="משפט המותג">
-                <span className="signature-mark" aria-hidden="true">&quot;</span>
                 <p className="signature-title">הכול מתחיל ביחסים</p>
                 <p>כשהקשר בין הורה לילד טוב, שיתוף הפעולה גדל.</p>
               </div>
@@ -586,6 +585,10 @@ export default function Home() {
                 height="1125"
                 loading="lazy"
               />
+              <figcaption>
+                <strong>שירה לוין</strong>
+                <span>מדריכת הורים ומנחת קבוצות בגישת אדלר</span>
+              </figcaption>
             </figure>
             <div>
               <h2 id="about-title">נעים להכיר, אני שירה לוין</h2>
