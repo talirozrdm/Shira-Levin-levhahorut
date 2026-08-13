@@ -242,6 +242,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showStickyWhatsapp, setShowStickyWhatsapp] = useState(false);
   const [preferences, setPreferences] = useState(defaultPreferences);
 
   const bodyClass = useMemo(
@@ -297,6 +298,25 @@ export default function Home() {
     return () => {
       observer.disconnect();
       root.classList.remove("reveal-ready");
+    };
+  }, []);
+
+  useEffect(() => {
+    const hero = document.querySelector<HTMLElement>(".hero");
+
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyWhatsapp(!entry.isIntersecting);
+      },
+      { rootMargin: "-84px 0px 0px 0px", threshold: 0 },
+    );
+
+    observer.observe(hero);
+
+    return () => {
+      observer.disconnect();
     };
   }, []);
 
@@ -383,9 +403,11 @@ export default function Home() {
                 אני מלווה הורים לילדים בגיל בית הספר, למתבגרים ולהורים לילדים על
                 הרצף האוטיסטי, בדרך לחיזוק הקשר, הסמכות ההורית והתקשורת בבית.
               </p>
-              <p className="lead-note">
-                הכול מתחיל ביחסים. כשהקשר בין הורה לילד טוב, שיתוף הפעולה גדל.
-              </p>
+              <div className="signature-block" aria-label="משפט המותג">
+                <span className="signature-mark" aria-hidden="true">&quot;</span>
+                <p className="signature-title">הכול מתחיל ביחסים</p>
+                <p>כשהקשר בין הורה לילד טוב, שיתוף הפעולה גדל.</p>
+              </div>
               <div className="hero-actions">
                 <a
                   className="button"
@@ -393,6 +415,7 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <ContactIcon name="whatsapp" />
                   לתיאום שיחת היכרות בוואטסאפ
                 </a>
                 <a className="text-link" href="#process">
@@ -534,7 +557,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section soft-section reveal-item" aria-labelledby="strengthen-title">
+        <section className="section soft-section clarity-section reveal-item" aria-labelledby="strengthen-title">
           <div className="container split">
             <div>
               <h2 id="strengthen-title">להוביל את המשפחה מתוך בהירות</h2>
@@ -544,7 +567,7 @@ export default function Home() {
               </p>
               <p className="list-intro">בתהליך אני רוצה לחזק יחד איתכם:</p>
             </div>
-            <ul className="check-list">
+            <ul className="check-list clarity-list">
               <li>יותר ביטחון ומסוגלות הורית</li>
               <li>תקשורת רגועה ומכבדת יותר</li>
               <li>גבולות ברורים ועקביים</li>
@@ -580,12 +603,24 @@ export default function Home() {
                 ושאפשר לצאת בהדרגה מהבלבול ומהמאבק.
               </p>
               <h3>הכשרות וניסיון</h3>
-              <ul className="check-list">
-                <li>הדרכת הורים והנחיית קבוצות במכון אדלר</li>
-                <li>התמחות בהדרכת הורים למתבגרים</li>
-                <li>התמחות בליווי הורים לילדים על הרצף האוטיסטי</li>
-                <li>5 שנות ניסיון בליווי הורים ומשפחות</li>
-              </ul>
+              <div className="qualification-list">
+                <p>
+                  <strong>מכון אדלר</strong>
+                  <span>הדרכת הורים והנחיית קבוצות</span>
+                </p>
+                <p>
+                  <strong>מתבגרים</strong>
+                  <span>התמחות בהדרכת הורים למתבגרים</span>
+                </p>
+                <p>
+                  <strong>הרצף האוטיסטי</strong>
+                  <span>התמחות בליווי הורים</span>
+                </p>
+                <p>
+                  <strong>5 שנות ניסיון</strong>
+                  <span>ליווי הורים ומשפחות</span>
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -647,6 +682,7 @@ export default function Home() {
               <span className="cta-break">אני מזמינה אתכם להתחיל בשיחת היכרות קצרה.</span>
             </p>
             <a className="button" href={whatsappMessage} target="_blank" rel="noopener noreferrer">
+              <ContactIcon name="whatsapp" />
               לתיאום שיחת היכרות בוואטסאפ
             </a>
           </div>
@@ -810,11 +846,13 @@ export default function Home() {
       </div>
 
       <a
-        className="sticky-whatsapp"
+        className={showStickyWhatsapp ? "sticky-whatsapp is-visible" : "sticky-whatsapp"}
         href={whatsappMessage}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="שליחת הודעת וואטסאפ לשירה לוין לתיאום שיחת היכרות"
+        aria-hidden={!showStickyWhatsapp}
+        tabIndex={showStickyWhatsapp ? 0 : -1}
         data-track="click_whatsapp"
       >
         <ContactIcon name="whatsapp" />
