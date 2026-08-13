@@ -393,7 +393,7 @@ export default function Home() {
 
       <main id="main-content">
         <section className="hero section" id="top" aria-labelledby="hero-title">
-          <span className="editorial-word hero-word" aria-hidden="true">RELATIONSHIPS</span>
+          <span className="editorial-word hero-word" aria-hidden="true">יחסים</span>
           <div className="container hero-grid">
             <div className="hero-copy">
               <p className="eyebrow">הדרכת הורים אונליין בגישת אדלר</p>
@@ -449,7 +449,7 @@ export default function Home() {
         </section>
 
         <section className="section soft-section need-section reveal-item" aria-labelledby="need-title">
-          <span className="editorial-word need-word" aria-hidden="true">HOME</span>
+          <span className="editorial-word need-word" aria-hidden="true">בית</span>
           <div className="container narrow">
             <h2 id="need-title">אולי גם אצלכם בבית...</h2>
             <div className="emotion-list" role="list">
@@ -489,9 +489,9 @@ export default function Home() {
             <div className="section-heading">
               <h2 id="fit-title">למי הליווי מתאים?</h2>
             </div>
-            <div className="cards three-columns fit-cards">
+            <div className="editorial-grid fit-grid">
               {fitCards.map((card) => (
-                <article className="card" key={card.title}>
+                <article className="editorial-item" key={card.title}>
                   <h3>{card.title}</h3>
                   <p>{card.text}</p>
                 </article>
@@ -509,9 +509,10 @@ export default function Home() {
             <div className="section-heading">
               <h2 id="help-title">במה אני יכולה לעזור?</h2>
             </div>
-            <div className="cards two-columns">
-              {supportAreas.map((area) => (
-                <article className="card" key={area.title}>
+            <div className="editorial-grid help-grid">
+              {supportAreas.map((area, index) => (
+                <article className="editorial-item" key={area.title}>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                   <h3>{area.title}</h3>
                   <p>{area.text}</p>
                 </article>
@@ -521,7 +522,6 @@ export default function Home() {
         </section>
 
         <section className="section service-highlight reveal-item" id="services" aria-labelledby="services-title">
-          <span className="editorial-word service-word" aria-hidden="true">GUIDANCE</span>
           <div className="container service-grid">
             <div>
               <h2 id="services-title">הדרכת הורים אישית אונליין</h2>
@@ -545,6 +545,7 @@ export default function Home() {
         </section>
 
         <section className="section reveal-item" id="process" aria-labelledby="process-title">
+          <span className="editorial-word process-word" aria-hidden="true">דרך</span>
           <div className="container">
             <div className="section-heading">
               <h2 id="process-title">איך נראה התהליך?</h2>
@@ -570,8 +571,8 @@ export default function Home() {
               </p>
               <p className="list-intro">בתהליך אני רוצה לחזק יחד איתכם:</p>
             </div>
-            <ul className="check-list clarity-list">
-              <li>יותר ביטחון ומסוגלות הורית</li>
+            <ul className="clarity-list">
+              <li>ביטחון ומסוגלות הורית</li>
               <li>תקשורת רגועה ומכבדת יותר</li>
               <li>גבולות ברורים ועקביים</li>
               <li>קשר קרוב ובטוח יותר</li>
