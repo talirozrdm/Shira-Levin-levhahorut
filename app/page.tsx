@@ -393,6 +393,7 @@ export default function Home() {
 
       <main id="main-content">
         <section className="hero section" id="top" aria-labelledby="hero-title">
+          <span className="editorial-word hero-word" aria-hidden="true">RELATIONSHIPS</span>
           <div className="container hero-grid">
             <div className="hero-copy">
               <p className="eyebrow">הדרכת הורים אונליין בגישת אדלר</p>
@@ -448,6 +449,7 @@ export default function Home() {
         </section>
 
         <section className="section soft-section need-section reveal-item" aria-labelledby="need-title">
+          <span className="editorial-word need-word" aria-hidden="true">HOME</span>
           <div className="container narrow">
             <h2 id="need-title">אולי גם אצלכם בבית...</h2>
             <div className="emotion-list" role="list">
@@ -465,6 +467,7 @@ export default function Home() {
         </section>
 
         <section className="section approach-section reveal-item" aria-labelledby="principles-title">
+          <span className="editorial-word approach-word" aria-hidden="true">יחסים</span>
           <div className="container">
             <div className="section-heading">
               <h2 id="principles-title">שלושה דברים שמלווים אותי בדרך</h2>
@@ -518,6 +521,7 @@ export default function Home() {
         </section>
 
         <section className="section service-highlight reveal-item" id="services" aria-labelledby="services-title">
+          <span className="editorial-word service-word" aria-hidden="true">GUIDANCE</span>
           <div className="container service-grid">
             <div>
               <h2 id="services-title">הדרכת הורים אישית אונליין</h2>
