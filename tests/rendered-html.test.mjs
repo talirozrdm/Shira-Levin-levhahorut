@@ -81,6 +81,8 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.match(html, /@shira_goldman_levin/);
   assert.match(html, /class="emotion-list"/);
   assert.match(html, /class="signature-block"/);
+  assert.doesNotMatch(html, /signature-mark/);
+  assert.match(html, /<figcaption><strong>שירה לוין<\/strong><span>מדריכת הורים ומנחת קבוצות בגישת אדלר<\/span><\/figcaption>/);
   assert.match(html, /שלושה דברים שמלווים אותי בדרך/);
   assert.match(html, /class="sticky-whatsapp"/);
   assert.doesNotMatch(html, /<form\b/);
@@ -108,11 +110,14 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.match(page, /lev-hahorut-logo-512\.png/);
   assert.doesNotMatch(page, /submitContact|FormEvent|contact-form|aria-invalid|field-error/);
   assert.match(css, /--body-copy-size:\s*calc\(18px \* var\(--user-font-scale\)\)/);
-  assert.match(css, /\.hero-image\s*\{[\s\S]*width:\s*min\(86vw, 310px\)/);
+  assert.match(css, /\.hero-image\s*\{[\s\S]*width:\s*min\(84vw, 308px\)/);
   assert.match(css, /0 0 30px rgb\(185 129 209 \/ 0\.2\)/);
   assert.match(css, /\.signature-block\s*\{/);
+  assert.doesNotMatch(css, /\.signature-mark\s*\{/);
   assert.match(css, /\.sticky-whatsapp\.is-visible\s*\{/);
   assert.match(css, /@keyframes shape-drift/);
+  assert.match(css, /content:\s*"RELATIONSHIPS"/);
+  assert.match(css, /--aubergine:\s*#26102f/);
   assert.match(css, /\.principles-list\s*\{[\s\S]*border-block:\s*0/);
   assert.match(css, /\.trust-grid\s*\{[\s\S]*display:\s*flex/);
   assert.match(css, /\.nowrap\s*\{[\s\S]*white-space:\s*nowrap/);
