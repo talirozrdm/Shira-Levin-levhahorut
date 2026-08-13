@@ -81,10 +81,10 @@ const fitCards = [
 ];
 
 const processSteps = [
-  "אתם שולחים הודעה, ואני מתאמת איתכם שיחת היכרות קצרה.",
-  "במפגש הראשון אני ממפה יחד איתכם את האתגרים ומגדירה מטרות.",
-  "בכל מפגש אני משלבת הבנה, כלים ותרגול מותאם לבית.",
-  "בין המפגשים אתם מיישמים, ובמפגש הבא אני בוחנת יחד איתכם את ההתקדמות.",
+  "שיחת היכרות קצרה",
+  "מיפוי האתגרים והגדרת מטרות",
+  "מפגשים עם הבנה, כלים ותרגול",
+  "יישום בין המפגשים ובחינת ההתקדמות",
 ];
 
 const faqItems = [
@@ -355,9 +355,6 @@ export default function Home() {
             <a href="#fit" onClick={() => setMenuOpen(false)}>
               למי מתאים
             </a>
-            <a href="#help" onClick={() => setMenuOpen(false)}>
-              איך אני עוזרת
-            </a>
             <a href="#services" onClick={() => setMenuOpen(false)}>
               השירותים
             </a>
@@ -366,6 +363,9 @@ export default function Home() {
             </a>
             <a href="#faq" onClick={() => setMenuOpen(false)}>
               שאלות נפוצות
+            </a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>
+              יצירת קשר
             </a>
           </nav>
         </div>
@@ -380,9 +380,8 @@ export default function Home() {
               <p className="hero-kicker">הדרכת הורים שמתחילה ביחסים</p>
               <p className="hero-identity">אני שירה לוין, מדריכת הורים ומנחת קבוצות בגישת אדלר</p>
               <p>
-                אני מלווה הורים אונליין לילדים בגיל בית הספר, הורים למתבגרים
-                והורים לילדים על הרצף האוטיסטי, כדי לחזק את הקשר, הסמכות ההורית
-                והתקשורת בבית.
+                אני מלווה הורים לילדים בגיל בית הספר, למתבגרים ולהורים לילדים על
+                הרצף האוטיסטי, בדרך לחיזוק הקשר, הסמכות ההורית והתקשורת בבית.
               </p>
               <p className="lead-note">
                 הכול מתחיל ביחסים. כשהקשר בין הורה לילד טוב, שיתוף הפעולה גדל.
@@ -421,7 +420,6 @@ export default function Home() {
               <div className="trust-item" key={item.title}>
                 <TrustIcon />
                 <strong>{item.title}</strong>
-                <span>{item.text}</span>
               </div>
             ))}
           </div>
@@ -431,15 +429,11 @@ export default function Home() {
           <div className="container narrow">
             <h2 id="need-title">אולי גם אצלכם בבית...</h2>
             <div className="emotion-list" role="list">
-              <div className="emotion-column">
-                <p role="listitem">כל בקשה הופכת לוויכוח.</p>
-                <p role="listitem">קשה להציב גבולות בלי להגיע למאבק.</p>
-                <p role="listitem">אתם רוצים להיות מכילים, אבל מרגישים שהסמכות ההורית נשחקה.</p>
-              </div>
-              <div className="emotion-column">
-                <p role="listitem">המתבגר מתרחק וקשה להגיע אליו.</p>
-                <p role="listitem">בסוף היום נשארים עם תסכול, אשמה ותחושה שכבר ניסיתם הכול.</p>
-              </div>
+              <p role="listitem">כל בקשה הופכת לוויכוח.</p>
+              <p role="listitem">המתבגר מתרחק, ואתם מרגישים שקשה להגיע אליו.</p>
+              <p role="listitem">קשה להציב גבולות בלי להגיע למאבק.</p>
+              <p role="listitem">אתם רוצים להכיל ולהבין, אבל מרגישים שהסמכות ההורית נשחקה.</p>
+              <p role="listitem">בסוף היום נשארים עם תסכול, אשמה ותחושה שכבר ניסיתם הכול.</p>
             </div>
             <p className="section-summary">
               הקושי אינו אומר שנכשלתם כהורים. הוא מסמן שאולי הגיע הזמן למצוא דרך
@@ -448,14 +442,15 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section reveal-item" aria-labelledby="principles-title">
+        <section className="section approach-section reveal-item" aria-labelledby="principles-title">
           <div className="container">
             <div className="section-heading">
-              <h2 id="principles-title">שלושה עקרונות שמחזיקים את הדרך</h2>
+              <h2 id="principles-title">שלושה דברים שמלווים אותי בדרך</h2>
             </div>
-            <div className="cards three-columns">
-              {principles.map((principle) => (
+            <div className="principles-list">
+              {principles.map((principle, index) => (
                 <article className="card" key={principle.title}>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                   <h3>{principle.title}</h3>
                   <p>{principle.text}</p>
                 </article>
@@ -464,7 +459,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section tinted-section reveal-item" id="fit" aria-labelledby="fit-title">
+        <section className="section tinted-section fit-section reveal-item" id="fit" aria-labelledby="fit-title">
           <div className="container">
             <div className="section-heading">
               <h2 id="fit-title">למי הליווי מתאים?</h2>
@@ -484,7 +479,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section reveal-item" id="help" aria-labelledby="help-title">
+        <section className="section help-section reveal-item" id="help" aria-labelledby="help-title">
           <div className="container">
             <div className="section-heading">
               <h2 id="help-title">במה אני יכולה לעזור?</h2>
@@ -505,26 +500,20 @@ export default function Home() {
             <div>
               <h2 id="services-title">הדרכת הורים אישית אונליין</h2>
               <p>
-                בתהליך אישי אני מחברת בין הבנת הדינמיקה המשפחתית לבין כלים מעשיים
-                שאפשר לתרגל בבית, בקצב שמתאים למשפחה שלכם.
+                תהליך אישי שמחבר בין הבנת הדינמיקה המשפחתית לבין כלים מעשיים שאפשר
+                ליישם בבית.
               </p>
               <ul className="check-list">
-                <li>לרוב 8 עד 12 מפגשים, בהתאם לצורך</li>
+                <li>לרוב 8-12 מפגשים בהתאם לצורכי המשפחה</li>
                 <li>מפגשים אונליין בזום</li>
-                <li>משימות וכלים בין המפגשים</li>
+                <li>כלים ותרגול בין המפגשים</li>
                 <li>ליווי בוואטסאפ לאורך התהליך</li>
                 <li>הגדרת מטרות ובחינת ההתקדמות</li>
               </ul>
             </div>
             <aside className="service-side" aria-label="שירותים נוספים">
               <h3>אפשרויות נוספות</h3>
-              <ul>
-                <li>פגישת ייעוץ ממוקדת</li>
-                <li>ליווי מתמשך</li>
-                <li>הרצאות להורים</li>
-                <li>סדנאות קבוצתיות</li>
-                <li>וובינרים</li>
-              </ul>
+              <p>פגישת ייעוץ ממוקדת | הרצאות | סדנאות | וובינרים</p>
             </aside>
           </div>
         </section>

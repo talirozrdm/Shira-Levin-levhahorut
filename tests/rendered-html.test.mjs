@@ -49,7 +49,7 @@ test("renders the Hebrew RTL landing page with SEO essentials", async () => {
   const html = await response.text();
   assert.match(html, /<html lang="he" dir="rtl">/);
   assert.match(html, /<title>שירה לוין \| לב ההורות - הדרכת הורים אונליין למתבגרים ולמשפחות<\/title>/);
-  assert.match(html, /<meta name="description"/);
+  assert.match(html, /שירה לוין, מדריכת הורים בגישת אדלר, מלווה אונליין הורים לילדים בגיל בית הספר/);
   assert.match(html, /<link rel="canonical" href="https:\/\/example\.com\/lev-hahorut"/);
   assert.match(html, /property="og:image" content="https:\/\/example\.com\/assets\/lev-hahorut-og-placeholder\.jpg"/);
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
@@ -79,7 +79,8 @@ test("includes conversion, accessibility, and privacy affordances", async () => 
   assert.doesNotMatch(html, /<br\s*\/?>/i);
   assert.match(html, /שלחו לי הודעה בוואטסאפ/);
   assert.match(html, /@shira_goldman_levin/);
-  assert.match(html, /class="emotion-column"/);
+  assert.match(html, /class="emotion-list"/);
+  assert.match(html, /שלושה דברים שמלווים אותי בדרך/);
   assert.doesNotMatch(html, /<form\b/);
   assert.doesNotMatch(html, /שליחת פרטים/);
   assert.doesNotMatch(html, /הטופס עדיין|טופס יצירת קשר/);
@@ -105,16 +106,18 @@ test("keeps starter code and disallowed copy out of the finished page", async ()
   assert.match(page, /lev-hahorut-logo-512\.png/);
   assert.doesNotMatch(page, /submitContact|FormEvent|contact-form|aria-invalid|field-error/);
   assert.match(css, /--body-copy-size:\s*calc\(18px \* var\(--user-font-scale\)\)/);
-  assert.match(css, /\.hero-image\s*\{[\s\S]*width:\s*min\(100%, 340px\)/);
-  assert.match(css, /0 0 24px rgb\(185 129 209 \/ 0\.18\)/);
+  assert.match(css, /\.hero-image\s*\{[\s\S]*width:\s*min\(100%, 318px\)/);
+  assert.match(css, /0 0 30px rgb\(185 129 209 \/ 0\.2\)/);
+  assert.match(css, /\.principles-list\s*\{[\s\S]*border-block:\s*1px solid var\(--border\)/);
+  assert.match(css, /\.trust-grid\s*\{[\s\S]*display:\s*flex/);
   assert.match(css, /\.nowrap\s*\{[\s\S]*white-space:\s*nowrap/);
   assert.match(css, /\.cta-break\s*\{[\s\S]*display:\s*block/);
   assert.match(css, /text-wrap:\s*balance/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.match(privacy, /נכון למועד פרסום האתר לא נעשה שימוש בכלי מדידה או מעקב של צד שלישי/);
+  assert.match(privacy, /נכון למועד עדכון מדיניות זו, האתר אינו עושה שימוש בכלי מדידה או מעקב חיצוניים לצורכי פרסום/);
   assert.match(privacy, /<span class="nowrap">shumi25@gmail\.com<\/span>/);
   assert.match(privacy, /<span class="nowrap" dir="ltr">050-753-2044<\/span>/);
-  assert.match(accessibility, /נעשה מאמץ להנגיש את האתר בהתאם להנחיות הנגישות המקובלות/);
+  assert.match(accessibility, /נעשה מאמץ להנגיש את האתר ולאפשר חוויית שימוש נוחה ככל האפשר/);
   assert.match(accessibility, /<span class="nowrap" dir="ltr">050-753-2044<\/span>/);
 
   await assert.rejects(
